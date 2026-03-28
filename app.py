@@ -5,9 +5,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import init_db
 
-app = Flask(__name__)
-init_db()
+app = Flask(__name__)  # Start Flask App
+init_db()  # Init Database
 
+# Index route
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html") # Return index.html file where shows your job applications
