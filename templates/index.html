@@ -9,15 +9,25 @@
     <table class="table">
         <thead>
             <th>
+                <td>Date</td>
                 <td>Company</td>
-                <td>Position</td>
+                <td>Job Title</td>
                 <td>Salary</td>
                 <td>Category</td>
                 <td>Status</td>
-                <td>Limit Day</td>
+                <td>Deadline</td>
+                <td>Link</td>
             </th>
         </thead>
-        
+        <tbody>
+
+        </tbody>
     </table>
 
+<div class="mb-3">
+    <form action="/create", method="post">
+        <input hidden>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+</div>
 {% endblock %}

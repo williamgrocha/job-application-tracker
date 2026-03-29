@@ -12,3 +12,11 @@ init_db()  # Init Database
 @app.route("/")
 def index():
     return render_template("index.html") # Return index.html file where shows your job applications
+
+
+@app.route("/create", methods=["GET", "POST"])
+def new_application():
+    if request.method == "POST":
+        return render_template("create.html")
+    else:
+        return render_template("create.html")

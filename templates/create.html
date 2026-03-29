@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Job
+{% endblock %}
+
+{% block main %}
+    <form action="/create" method="post" class="d-flex justify-content-center align-items-end gap-2 flex-wrap">
+        <div class="mb-3">
+            <input required autocomplete="off" autofocus class="form-control" name="company" placeholder="Company" type="text">
+        </div>
+        <div class="mb-3">
+            <input required autocomplete="off" class="form-control" name="job_title" placeholder="Title" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control" name="salary" placeholder="Salary" type="number">
+        </div>
+        <div class="mb-3">
+            <input required autocomplete="off" class="form-control" name="category" placeholder="Category" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control" name="shares" placeholder="Deadline" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Add new application</button>
+    </form>
+{% endblock %}
