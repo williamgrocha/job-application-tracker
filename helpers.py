@@ -10,3 +10,7 @@ def init_db():
     conn.commit() # Commit all changes
     conn.close() # Close connection
     return None
+
+def usd(value):
+    """Format value as BRL."""
+    return f"R${value:,.2f}"
