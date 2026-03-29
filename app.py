@@ -21,12 +21,12 @@ def index():
 @app.route("/create", methods=["GET", "POST"])
 def new_application():
     if request.method == "POST":
-        company = request.form.get("company").upper()
-        title = request.form.get("job_title").upper()
+        company = request.form.get("company").upper() # type: ignore
+        title = request.form.get("job_title").upper() # type: ignore
         salary = request.form.get("salary")
         if salary == "":
             salary = None
-        category = request.form.get("category").lower()
+        category = request.form.get("category").lower() # type: ignore
         if (category not in CATEGORIES):
             category = "onsite"
         deadline = request.form.get("deadline")
