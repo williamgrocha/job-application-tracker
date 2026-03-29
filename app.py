@@ -17,6 +17,12 @@ def index():
 @app.route("/create", methods=["GET", "POST"])
 def new_application():
     if request.method == "POST":
+        company = request.form.get("company")
+        title = request.form.get("job_title")
+        salary = request.form.get("salary")
+        category = request.form.get("category")
+        
+
         return render_template("create.html")
     else:
         return render_template("create.html")
