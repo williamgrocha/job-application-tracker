@@ -1,7 +1,5 @@
 import sqlite3
-from flask import Flask, flash, redirect, render_template, request, session
-from flask_session import Session
-from werkzeug.security import check_password_hash, generate_password_hash
+from flask import Flask, flash, redirect, render_template, request
 
 from helpers import init_db
 
@@ -21,7 +19,7 @@ def new_application():
         title = request.form.get("job_title")
         salary = request.form.get("salary")
         category = request.form.get("category")
-        
+
 
         return render_template("create.html")
     else:
