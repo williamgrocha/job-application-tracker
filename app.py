@@ -6,6 +6,12 @@ from helpers import init_db
 app = Flask(__name__)  # Start Flask App
 init_db()  # Init Database
 
+CATEGORIES = [
+    "Remote",
+    "Hybrid",
+    "On-site"
+]
+
 # Index route
 @app.route("/")
 def index():
@@ -15,12 +21,28 @@ def index():
 @app.route("/create", methods=["GET", "POST"])
 def new_application():
     if request.method == "POST":
-        company = request.form.get("company")
-        title = request.form.get("job_title")
+        company = request.form.get("company").upper()
+        title = request.form.get("job_title").upper()
         salary = request.form.get("salary")
-        category = request.form.get("category")
+        if salary == "":
+            salary = None
+        category = request.form.get("category").lower()
+        if (category not in CATEGORIES):
+            category = "onsite"
+        deadline = request.form.get("deadline")
+        if deadline == "":
+            deadline = None
+        print(company)
 
+        conn = sqlite3.connect("applications.db")
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO applications (company, job_title, salary, category, deadline, status) VALUES (?, ?, ?, ?, ?, 'saved')",
+            (company, title, salary, category, deadline)
+        )
+        conn.commit()
+        conn.close()
 
-        return render_template("create.html")
+        return redirect("/")
     else:
-        return render_template("create.html")
+        return render_template("create.html", categories=CATEGORIES)
