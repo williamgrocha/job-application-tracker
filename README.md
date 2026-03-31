@@ -27,6 +27,7 @@ This project was built to practice backend development concepts such as web appl
 
 **Frontend**
 - HTML
+- CSS
 - Bootstrap
 
 **Tools**
