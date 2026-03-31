@@ -39,7 +39,7 @@ def new_application():
         salary = request.form.get("salary")
         if salary == "":
             salary = 0
-        category = request.form.get("category").lower() # type: ignore
+        category = request.form.get("category").capitalize() # type: ignore
         if (category not in CATEGORIES):
             category = "On-site"
         deadline = request.form.get("deadline")
