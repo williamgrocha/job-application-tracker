@@ -60,8 +60,44 @@ def new_application():
         return render_template("create.html", categories=CATEGORIES)
     
 
-@app.route("/edit", methods=["POST", "GET"])
-def edit():
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit(id):
+    conn = sqlite3.connect("applications.db")
+    conn.row_factory = sqlite3.Row
+    
+    if request.method == "POST":
+        company = request.form.get("company")
+        title = request.form.get("job_title")
+        salary = request.form.get("salary")
+        if salary == "":
+            salary = 0
+        category = request.form.get("category")
+        if (category not in CATEGORIES):
+            category = "On-site"
+        deadline = request.form.get("deadline")
+        if deadline == "":
+            deadline = None
+        link = request.form.get("link")
+        
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE applications SET company=?, job_title=?, salary=?, category=?, deadline=?, link=? WHERE id=?",
+            (company.upper(), title.upper(), salary, category.capitalize(), deadline, link, id)
+        )
+        conn.commit()
+        conn.close()
+        
+        return redirect("/")
+    else:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM applications WHERE id=?", (id,))
+        application = cursor.fetchone()
+        conn.close()
+        
+        if not application:
+            return "Application not found", 404
+        
+        return render_template("edit.html", application=application, categories=CATEGORIES)
 
 
     return render_template(edit.html)

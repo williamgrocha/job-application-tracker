@@ -30,8 +30,8 @@
                     <td class="text-middle">{{ application["status"] }}</td>
                     <td class="text-middle">{{ application["deadline"] }}</td>
                     <td class="text-end"></td>
-                    <td><button class="btn btn-secondary">Edit</button></td>
-                    <td><button class="btn btn-danger">Delete</button></td>
+                    <td><a href="/edit/{{ application['id'] }}"class="btn btn-sm btn-secondary">Edit</a></td>
+                    <td><button class="btn btn-sm btn-danger">Delete</button></td>
                 </tr>
             {% endfor %}
         </tbody>
