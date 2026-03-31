@@ -39,7 +39,7 @@ def new_application():
         salary = request.form.get("salary")
         if salary == "":
             salary = 0
-        category = request.form.get("category").capitalize() # type: ignore
+        category = request.form.get("category") # type: ignore
         if (category not in CATEGORIES):
             category = "On-site"
         deadline = request.form.get("deadline")
@@ -72,7 +72,7 @@ def edit(id):
         if salary == "":
             salary = 0
         category = request.form.get("category")
-        if (category not in CATEGORIES):
+        if (category not in CATEGORIES or category == None):
             category = "On-site"
         deadline = request.form.get("deadline")
         if deadline == "":
@@ -82,7 +82,7 @@ def edit(id):
         cursor = conn.cursor()
         cursor.execute(
             "UPDATE applications SET company=?, job_title=?, salary=?, category=?, deadline=?, link=? WHERE id=?",
-            (company.upper(), title.upper(), salary, category.capitalize(), deadline, link, id)
+            (company.upper(), title.upper(), salary, category, deadline, link, id)
         )
         conn.commit()
         conn.close()
