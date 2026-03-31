@@ -15,7 +15,15 @@ CATEGORIES = [
 # Index route
 @app.route("/")
 def index():
-    return render_template("index.html") # Return index.html file where shows your job applications
+    conn = sqlite3.connect("applications.db") #inicia conexão com banco de dados
+    cursor = conn.cursor() # inicia cursor pro banco de dados
+    cursor.execute( # query de busca
+        "SELECT * FROM applications"
+        )
+    applications = cursor.fetchall() # Armazena o retorno da query em applications
+    print(applications)
+    conn.close()
+    return render_template("index.html", applications=applications) # Return index.html file where shows your job applications
 
 
 @app.route("/create", methods=["GET", "POST"])
@@ -26,7 +34,7 @@ def new_application():
         salary = request.form.get("salary")
         if salary == "":
             salary = None
-        category = request.form.get("category").lower() # type: ignore
+        category = request.form.get("category").capitalize() # type: ignore
         if (category not in CATEGORIES):
             category = "onsite"
         deadline = request.form.get("deadline")
