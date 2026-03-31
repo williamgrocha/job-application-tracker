@@ -17,7 +17,7 @@
                 <input autocomplete="off" class="form-control" name="salary" placeholder="Salary" type="number">
             </div>
             <div class="mb-3">
-                <select class="form-select" name="category">
+                <select required class="form-select" name="category">
                     <option selected disabled>Category</option>
                     {% for category in categories %}
                     <option value="{{ category }}">{{ category }}</option>

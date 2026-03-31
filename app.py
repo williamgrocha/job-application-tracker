@@ -98,6 +98,18 @@ def edit(id):
             return "Application not found", 404
         
         return render_template("edit.html", application=application, categories=CATEGORIES)
+    
 
+@app.route("/delete/<int:id>", methods=["GET"])
+def delete(id):
+    conn = sqlite3.connect("applications.db")
+    cursor = conn.cursor()
 
-    return render_template(edit.html)
+    cursor.execute(
+        "DELETE FROM applications WHERE id=?",
+        (id,)
+        )
+    
+    conn.commit()
+    conn.close()
+    return redirect("/")

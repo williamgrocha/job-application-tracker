@@ -17,6 +17,7 @@
                 <th>Status</th>
                 <th>Deadline</th>
                 <th>Link</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -30,8 +31,7 @@
                     <td class="text-middle">{{ application["status"] }}</td>
                     <td class="text-middle">{{ application["deadline"] }}</td>
                     <td class="text-end"></td>
-                    <td><a href="/edit/{{ application['id'] }}"class="btn btn-sm btn-secondary">Edit</a></td>
-                    <td><button class="btn btn-sm btn-danger">Delete</button></td>
+                    <td><a href="/edit/{{ application['id'] }}"class="btn btn-sm btn-secondary">Edit</a><form class="d-inline" action="/delete/{{ application['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')"><button class="btn ms-1 btn-sm btn-danger">Delete</button></form></td>
                 </tr>
             {% endfor %}
         </tbody>
