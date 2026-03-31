@@ -16,19 +16,20 @@ CATEGORIES = [
 ]
 
 # Index route
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def index():
     conn = sqlite3.connect("applications.db") #inicia conexão com banco de dados
-    conn.row_factory = sqlite3.Row # inicia cursor pro banco de dados
+    conn.row_factory = sqlite3.Row # inicia cursor pro banco de dados em rows
     res = conn.execute( # query de busca
         "SELECT * FROM applications"
         )
     applications = res.fetchall() # Armazena o retorno da query em applications
-    print(applications)
-    print(sqlite3.Row)
     conn.close()
 
-    return render_template("index.html", applications=applications) # Return index.html file where shows your job applications
+    if not applications:
+        return render_template("index-empty.html")
+    else:
+        return render_template("index.html", applications=applications) # Return index.html file where shows your job applications
 
 
 @app.route("/create", methods=["GET", "POST"])
@@ -100,7 +101,7 @@ def edit(id):
         return render_template("edit.html", application=application, categories=CATEGORIES)
     
 
-@app.route("/delete/<int:id>", methods=["GET"])
+@app.route("/delete/<int:id>", methods=["POST"])
 def delete(id):
     conn = sqlite3.connect("applications.db")
     cursor = conn.cursor()
