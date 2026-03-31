@@ -11,6 +11,6 @@ def init_db():
     conn.close() # Close connection
     return None
 
-def usd(value):
+def brl(value):
     """Format value as BRL."""
     return f"R${value:,.2f}"

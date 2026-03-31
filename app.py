@@ -1,10 +1,13 @@
 import sqlite3
 from flask import Flask, flash, redirect, render_template, request
 
-from helpers import init_db
+from helpers import init_db, brl
 
 app = Flask(__name__)  # Start Flask App
 init_db()  # Init Database
+
+# Custom filter
+app.jinja_env.filters["brl"] = brl
 
 CATEGORIES = [
     "Remote",
@@ -16,13 +19,15 @@ CATEGORIES = [
 @app.route("/")
 def index():
     conn = sqlite3.connect("applications.db") #inicia conexão com banco de dados
-    cursor = conn.cursor() # inicia cursor pro banco de dados
-    cursor.execute( # query de busca
+    conn.row_factory = sqlite3.Row # inicia cursor pro banco de dados
+    res = conn.execute( # query de busca
         "SELECT * FROM applications"
         )
-    applications = cursor.fetchall() # Armazena o retorno da query em applications
+    applications = res.fetchall() # Armazena o retorno da query em applications
     print(applications)
+    print(sqlite3.Row)
     conn.close()
+
     return render_template("index.html", applications=applications) # Return index.html file where shows your job applications
 
 
@@ -33,15 +38,14 @@ def new_application():
         title = request.form.get("job_title").upper() # type: ignore
         salary = request.form.get("salary")
         if salary == "":
-            salary = None
-        category = request.form.get("category").capitalize() # type: ignore
+            salary = 0
+        category = request.form.get("category").lower() # type: ignore
         if (category not in CATEGORIES):
-            category = "onsite"
+            category = "On-site"
         deadline = request.form.get("deadline")
         if deadline == "":
             deadline = None
-        print(company)
-
+        print(category)
         conn = sqlite3.connect("applications.db")
         cursor = conn.cursor()
         cursor.execute(
@@ -54,3 +58,10 @@ def new_application():
         return redirect("/")
     else:
         return render_template("create.html", categories=CATEGORIES)
+    
+
+@app.route("/edit", methods=["POST", "GET"])
+def edit():
+
+
+    return render_template(edit.html)
