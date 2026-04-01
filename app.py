@@ -127,7 +127,7 @@ def edit(id):
         if not application:
             return "Application not found", 404
         
-        return render_template("edit.html", application=application, categories=CATEGORIES)
+        return render_template("edit.html", application=application, categories=CATEGORIES, statuses=STATUSES)
     
 
 @app.route("/delete/<int:id>", methods=["POST"])
