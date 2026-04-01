@@ -111,3 +111,38 @@ body {
 .date-input {
     position: relative;
 }
+
+/* 1. This is the 'Anchor' that keeps everything inside the box */
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* This ensures it matches the width of your other boxes */
+    flex: 1; 
+}
+
+/* 2. Position the R$ precisely */
+.currency-prefix {
+    position: absolute;
+    left: 1.3rem;
+    color: #626a74; /* Matching your placeholder gray */
+    font-size: 0.9rem;
+    pointer-events: none; /* User clicks 'through' it to the input */
+}
+
+/* 3. The Input Box styling */
+.salary-box input {
+    padding-left: 35px !important; /* This pushes 'Salary' to the right */
+    width: 100%;
+    /* Keep your existing border/background styles here */
+}
+
+/* 4. The 'No Arrows' fix for numbers */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}

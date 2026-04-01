@@ -19,12 +19,14 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <input type="number" class="form-control" id="salary" name="salary" placeholder="Salary">
+            <div class="row mb-3 input-group">
+                <div class="col-md-4 input-icon-wrapper salary-box">
+                    <span class="currency-prefix">R$</span>
+                    <input type="number" class="form-control salary-input" id="salary" name="salary" placeholder="Salary">
                 </div>
                 <div class="col-md-4">
                     <select class="form-control" id="category" name="category" required>
+                        <option value="" disabled selected>Category</option>
                         {% for cat in categories %}
                             <option value="{{ cat }}">{{ cat }}</option>
                         {% endfor %}
