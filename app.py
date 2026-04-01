@@ -33,14 +33,19 @@ def index():
     conn = sqlite3.connect("applications.db") #inicia conexão com banco de dados
     conn.row_factory = sqlite3.Row # inicia cursor pro banco de dados em rows
     res = conn.execute( # query de busca
-        "SELECT * FROM applications ORDER BY id DESC"
+        "SELECT * FROM applications WHERE status NOT IN ('Offer', 'Rejected', 'Withdrawn') ORDER BY id DESC"
         )
     applications = res.fetchall() # Armazena o retorno da query em applications
+
+    res = conn.execute(
+        "SELECT * FROM applications WHERE status NOT IN ('Saved', 'Applied', 'Interviewing') ORDER BY id DESC"
+        )
+    applications_closed = res.fetchall()
     conn.close()
     if not applications:
         return render_template("index-empty.html")
     else:
-        return render_template("index.html", applications=applications) # Return index.html file where shows your job applications
+        return render_template("index.html", applications=applications, closed=applications_closed) # Return index.html file where shows your job applications
 
 
 @app.route("/create", methods=["GET", "POST"])
