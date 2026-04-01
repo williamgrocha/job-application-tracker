@@ -38,7 +38,7 @@
                     <td class="text-middle text-wrap" style="max-width: 20rem; word-break: break-word">{{ application["job_title"] }}</td>
                     <td class="text-middle">{{ application["salary"] | brl }}</td>
                     <td class="text-middle">{{ application["category"] }}</td>
-                    <td class="text-middle"><div class="status-actions mt-2">
+                    <td class="text-middle"><div class="status-actions">
                     {% if application.status == 'Saved' %}
                         <form action="/update_status/{{ application.id }}/Applied" method="POST" style="display:inline;">
                         <button type="submit" class="btn-status btn-applied">Mark as Applied</button>
@@ -62,7 +62,7 @@
                     {% if application['link'] == None %}
                         <td class="text-end">N/A</td>
                     {% else %}
-                        <td class="text-end"><a target="_blank" href="{{ application['link'] }}">Go-to</a></td>
+                        <td class="text-end"><button class="btn-status btn-interview" target="_blank" href="{{ application['link'] }}">Go-to</button></td>
                     {% endif %}
                     <td><a href="/edit/{{ application['id'] }}"class="btn ms-1 btn-sm btn-status btn-applied">Edit</a><form class="d-inline" method="POST" action="/delete/{{ application['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')"><button class="btn ms-1 btn-sm btn-status btn-rejected">Delete</button></form></td>
                 </tr>
@@ -106,7 +106,7 @@
                         <td class="text-end">N/A</td>
                     {% else %}
                     {% endif %}
-                    <td><a href="/edit/{{ app['id'] }}"class="btn btn-sm btn-secondary">Edit</a><form class="d-inline" method="POST" action="/delete/{{ app['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')"><button class="btn ms-1 btn-sm btn-danger">Delete</button></form></td>
+                    <td><a href="/edit/{{ app['id'] }}"class="btn btn-status btn-sm btn-applied">Edit</a><form class="d-inline" method="POST" action="/delete/{{ app['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')"><button class="btn btn-status btn-sm ms-1 btn-rejected">Delete</button></form></td>
                 </tr>
             {% endfor %}
         </tbody>
