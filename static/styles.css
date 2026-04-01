@@ -191,3 +191,9 @@ input[type=number] {
 .btn-interview { background-color: #f3e8ff; color: #6b21a8; } /* Roxo */
 .btn-offer { background-color: #dcfce7; color: #166534; } /* Verde */
 .btn-rejected { background-color: #fee2e2; color: #991b1b; } /* Vermelho */
+
+.fix_edit_salary {
+   display: flex;
+   height: 100%;
+   align-items: flex-end;
+}
