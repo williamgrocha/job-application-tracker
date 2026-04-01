@@ -107,3 +107,7 @@ body {
     color: #64748b;
     margin-bottom: 24px;
 }
+
+.date-input {
+    position: relative;
+}
