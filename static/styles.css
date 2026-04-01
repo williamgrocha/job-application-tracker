@@ -69,3 +69,41 @@ body {
 .btn-primary:active {
     transform: translateY(0);
 }
+.card {
+    /* Your existing card styles, e.g., padding, border-radius, background-color, shadow */
+    text-align: center; /* Ensures content is centered horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Important for centering the circle and text */
+}
+
+.circle-warning {
+    width: 64px; /* Matches your current circle size */
+    height: 64px;
+    background-color: #e2e8f0; /* Keeping your original soft blue/gray color */
+    border-radius: 50%; /* Makes it a circle */
+    margin-bottom: 24px; /* Space between circle and text */
+
+    /* The 'magic' to center the SVG inside */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Icon specific styling */
+.circle-warning svg {
+    color: #f97316; /* A clear, non-aggressive orange for the warning color */
+}
+
+/* Base text styling for comparison with image */
+.text-large {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.text-small {
+    color: #64748b;
+    margin-bottom: 24px;
+}

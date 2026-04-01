@@ -114,3 +114,7 @@ def delete(id):
     conn.commit()
     conn.close()
     return redirect("/")
+
+@app.route("/nolink")
+def nolink():
+    return render_template("nolink.html")
