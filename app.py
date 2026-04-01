@@ -33,11 +33,10 @@ def index():
     conn = sqlite3.connect("applications.db") #inicia conexão com banco de dados
     conn.row_factory = sqlite3.Row # inicia cursor pro banco de dados em rows
     res = conn.execute( # query de busca
-        "SELECT * FROM applications"
+        "SELECT * FROM applications ORDER BY date_added DESC"
         )
     applications = res.fetchall() # Armazena o retorno da query em applications
     conn.close()
-
     if not applications:
         return render_template("index-empty.html")
     else:
