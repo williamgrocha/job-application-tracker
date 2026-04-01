@@ -155,16 +155,35 @@ input[type=number] {
     text-align: center;
 }
 
+/* Basic style for all flashes */
 .alert-message {
-    background-color: #fee2e2; /* Vermelho bem clarinho */
-    color: #b91c1c;           /* Texto vermelho escuro */
-    padding: 12px;
+    padding: 12px 20px;
     border-radius: 8px;
-    border: 1px solid #fecaca;
     font-size: 0.9rem;
     font-weight: 500;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     animation: fadeIn 0.3s ease;
+}
+
+/* If error */
+.alert-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+/* If success */
+.alert-success {
+    background-color: #dcfce7;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+/* If Warning */
+.alert-warning {
+    background-color: #fef9c3;
+    color: #854d0e;
+    border-color: #fef08a;
 }
 
 @keyframes fadeIn {

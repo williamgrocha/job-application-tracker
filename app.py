@@ -148,7 +148,7 @@ def delete(id):
 @app.route("/update_status/<int:id>/<string:status>", methods=["POST"])
 def update_status(id, status):
     if status not in STATUSES:
-        flash("Invalid Status.")
+        flash("Invalid Status.", "danger")
         return redirect("/")
 
     conn = sqlite3.connect("applications.db")
@@ -156,6 +156,10 @@ def update_status(id, status):
     cursor.execute("UPDATE applications SET status = ? WHERE id = ?", (status, id))
     conn.commit()
     conn.close()
-    
-    flash(f"Status Updated: {status}!")
+    if status == "Withdrawn" or status == "Applied":
+        flash(f"Status Updated: {status}!", "warning")
+    elif status == "Rejected":
+        flash(f"Status Updated: {status}!", "danger")
+    else:
+        flash(f"Status Updated: {status}!", "success")
     return redirect("/")

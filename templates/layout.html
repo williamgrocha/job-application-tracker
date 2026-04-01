@@ -20,11 +20,11 @@
     </head>
 
     <body>
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div id="flash-container" class="flash-wrapper">
             {% for message in messages %}
-                <div class="alert-dismissible alert-message">{{ message }}</div>
+                <div class="alert-message alert-{{ message[0] }}">{{ message[1] }}</div>
             {% endfor %}
             </div>
         {% endif %}
@@ -45,7 +45,7 @@
         </footer>
     <script>
     // Aguarda o documento carregar completamente
-    document.addEventListener("DOMContentLoaded", function() {
+    //document.addEventListener("DOMContentLoaded", function() {
         const flash = document.getElementById("flash-container");
         if (flash) {
             // 3000ms = 3 segundos de exibição
