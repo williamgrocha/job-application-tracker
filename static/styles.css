@@ -171,3 +171,23 @@ input[type=number] {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+.btn-status {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.btn-status:hover {
+    transform: scale(1.05);
+    filter: brightness(0.9);
+}
+
+.btn-applied { background-color: #dbeafe; color: #1e40af; } /* Azul */
+.btn-interview { background-color: #f3e8ff; color: #6b21a8; } /* Roxo */
+.btn-offer { background-color: #dcfce7; color: #166534; } /* Verde */
+.btn-rejected { background-color: #fee2e2; color: #991b1b; } /* Vermelho */

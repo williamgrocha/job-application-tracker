@@ -18,6 +18,15 @@ CATEGORIES = [
     "On-site"
 ]
 
+STATUSES = [
+    "Saved",
+    "Applied",
+    "Interviewing",
+    "Offer",
+    "Rejected",
+    "Withdrawn"
+]
+
 # Index route
 @app.route("/", methods=["POST", "GET"])
 def index():
@@ -61,7 +70,7 @@ def new_application():
         conn = sqlite3.connect("applications.db")
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO applications (company, job_title, salary, category, deadline, status, link) VALUES (?, ?, ?, ?, ?, 'saved', ?)",
+            "INSERT INTO applications (company, job_title, salary, category, deadline, link) VALUES (?, ?, ?, ?, ?, ?)",
             (company, title, salary, category, deadline, link)
         )
         conn.commit()
@@ -133,4 +142,19 @@ def delete(id):
     
     conn.commit()
     conn.close()
+    return redirect("/")
+
+@app.route("/update_status/<int:id>/<string:status>", methods=["POST"])
+def update_status(id, status):
+    if status not in STATUSES:
+        flash("Invalid Status.")
+        return redirect("/")
+
+    conn = sqlite3.connect("applications.db")
+    cursor = conn.cursor()
+    cursor.execute("UPDATE applications SET status = ? WHERE id = ?", (status, id))
+    conn.commit()
+    conn.close()
+    
+    flash(f"Status Updated: {status}!")
     return redirect("/")

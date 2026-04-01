@@ -28,7 +28,26 @@
                     <td class="text-middle text-wrap" style="max-width: 20rem; word-break: break-word">{{ application["job_title"] }}</td>
                     <td class="text-middle">{{ application["salary"] | brl }}</td>
                     <td class="text-middle">{{ application["category"] }}</td>
-                    <td class="text-middle">{{ application["status"] }}</td>
+                    <td class="text-middle"><div class="status-actions mt-2">
+                    {% if application.status == 'Saved' %}
+                        <form action="/update_status/{{ application.id }}/Applied" method="POST" style="display:inline;">
+                        <button type="submit" class="btn-status btn-applied">Mark as Applied</button>
+                        </form>
+                    {% elif application.status == 'Applied' %}
+                        <form action="/update_status/{{ application.id }}/Interviewing" method="POST" style="display:inline;">
+                        <button type="submit" class="btn-status btn-interview">Move to inverteview</button>
+                        </form>
+                    {% elif application.status == 'Interviewing' %}
+                        <div class="d-flex gap-2 justify-content-center">
+                        <form action="/update_status/{{ application.id }}/Offer" method="POST">
+                        <button type="submit" class="btn-status btn-offer">Got an Offer! 🎉</button>
+                        </form>
+                        <form action="/update_status/{{ application.id }}/Rejected" method="POST">
+                        <button type="submit" class="btn-status btn-rejected">Not this time</button>
+                        </form>
+                        </div>
+                    {% endif %}
+                    </div></td>
                     <td class="text-middle">{{ application["deadline"] }}</td>
                     {% if application['link'] == None %}
                         <td class="text-end">N/A</td>
