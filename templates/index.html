@@ -31,7 +31,7 @@
                     <td class="text-middle">{{ application["status"] }}</td>
                     <td class="text-middle">{{ application["deadline"] }}</td>
                     {% if application['link'] == None %}
-                        <td class="text-end"><a class="btn-link" href="/nolink">Goto</a></td>
+                        <td class="text-end">N/A</td>
                     {% else %}
                         <td class="text-end"><a target="_blank" href="{{ application['link'] }}">Goto</a></td>
                     {% endif %}
