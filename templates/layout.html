@@ -22,9 +22,9 @@
     <body>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="flash-wrapper">
+            <div id="flash-container" class="flash-wrapper">
             {% for message in messages %}
-                <div class="alert-message">{{ message }}</div>
+                <div class="alert-dismissible alert-message">{{ message }}</div>
             {% endfor %}
             </div>
         {% endif %}
@@ -43,7 +43,25 @@
 
         <footer class="mb-5">
         </footer>
-
+    <script>
+    // Aguarda o documento carregar completamente
+    document.addEventListener("DOMContentLoaded", function() {
+        const flash = document.getElementById("flash-container");
+        if (flash) {
+            // 3000ms = 3 segundos de exibição
+            setTimeout(function() {
+                // Aplica uma transição suave de opacidade
+                flash.style.transition = "opacity 0.6s ease";
+                flash.style.opacity = "0";
+                
+                // Remove o elemento do layout após o fade para não ocupar espaço
+                setTimeout(function() {
+                    flash.remove();
+                }, 600); 
+            }, 3000);
+        }
+    });
+    </script>
     </body>
 
 </html>
