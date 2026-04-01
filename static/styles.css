@@ -70,7 +70,7 @@ body {
     transform: translateY(0);
 }
 .card {
-    /* Your existing card styles, e.g., padding, border-radius, background-color, shadow */
+    /* Card styles*/
     text-align: center; /* Ensures content is centered horizontally */
     display: flex;
     flex-direction: column;
@@ -78,13 +78,13 @@ body {
 }
 
 .circle-warning {
-    width: 64px; /* Matches your current circle size */
+    width: 64px; /* Matches circle size */
     height: 64px;
-    background-color: #e2e8f0; /* Keeping your original soft blue/gray color */
+    background-color: #e2e8f0; /* Keep original soft blue/gray color */
     border-radius: 50%; /* Makes it a circle */
     margin-bottom: 24px; /* Space between circle and text */
 
-    /* The 'magic' to center the SVG inside */
+    /* Center the SVG inside */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -112,12 +112,12 @@ body {
     position: relative;
 }
 
-/* 1. This is the 'Anchor' that keeps everything inside the box */
+/* 1. Wrap everything inside the box */
 .input-icon-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    /* This ensures it matches the width of your other boxes */
+    /* This ensures it matches the width of other boxes */
     flex: 1; 
 }
 
@@ -125,19 +125,19 @@ body {
 .currency-prefix {
     position: absolute;
     left: 1.3rem;
-    color: #626a74; /* Matching your placeholder gray */
+    color: #626a74; /* Matching placeholder gray */
     font-size: 0.9rem;
     pointer-events: none; /* User clicks 'through' it to the input */
 }
 
-/* 3. The Input Box styling */
+/* 3. Style input box */
 .salary-box input {
     padding-left: 35px !important; /* This pushes 'Salary' to the right */
     width: 100%;
     /* Keep your existing border/background styles here */
 }
 
-/* 4. The 'No Arrows' fix for numbers */
+/* 4. Remove arrows from input type="number" */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -206,10 +206,10 @@ input[type=number] {
     filter: brightness(0.9);
 }
 
-.btn-applied { background-color: #dbeafe; color: #1e40af; } /* Azul */
-.btn-interview { background-color: #f3e8ff; color: #6b21a8; } /* Roxo */
-.btn-offer { background-color: #dcfce7; color: #166534; } /* Verde */
-.btn-rejected { background-color: #fee2e2; color: #991b1b; } /* Vermelho */
+.btn-applied { background-color: #dbeafe; color: #1e40af; } /* Blue */
+.btn-interview { background-color: #f3e8ff; color: #6b21a8; } /* Purple */
+.btn-offer { background-color: #dcfce7; color: #166534; } /* Green */
+.btn-rejected { background-color: #fee2e2; color: #991b1b; } /* Red */
 
 .fix_edit_salary {
    display: flex;
