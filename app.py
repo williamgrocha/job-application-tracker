@@ -38,6 +38,7 @@ def new_application():
         company = request.form.get("company").upper() # type: ignore
         title = request.form.get("job_title").upper() # type: ignore
         salary = request.form.get("salary")
+        link = request.form.get("link")
         if salary == "":
             salary = 0
         category = request.form.get("category") # type: ignore
@@ -46,12 +47,11 @@ def new_application():
         deadline = request.form.get("deadline")
         if deadline == "":
             deadline = None
-        print(category)
         conn = sqlite3.connect("applications.db")
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO applications (company, job_title, salary, category, deadline, status) VALUES (?, ?, ?, ?, ?, 'saved')",
-            (company, title, salary, category, deadline)
+            "INSERT INTO applications (company, job_title, salary, category, deadline, status, link) VALUES (?, ?, ?, ?, ?, 'saved', ?)",
+            (company, title, salary, category, deadline, link)
         )
         conn.commit()
         conn.close()
