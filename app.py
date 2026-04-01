@@ -68,7 +68,11 @@ def edit(id):
     
     if request.method == "POST":
         company = request.form.get("company")
+        if company == None:
+            company = "N/A"
         title = request.form.get("job_title")
+        if title == None:
+            title = "N/A"
         salary = request.form.get("salary")
         if salary == "":
             salary = 0
