@@ -108,11 +108,12 @@ def edit(id):
         if deadline == "":
             deadline = None
         link = request.form.get("link")
+        status = request.form.get("status")
         
         cursor = conn.cursor()
         cursor.execute(
-            "UPDATE applications SET company=?, job_title=?, salary=?, category=?, deadline=?, link=? WHERE id=?",
-            (company.upper(), title.upper(), salary, category, deadline, link, id)
+            "UPDATE applications SET company=?, job_title=?, salary=?, category=?, deadline=?, link=?, status=? WHERE id=?",
+            (company.upper(), title.upper(), salary, category, deadline, link, status, id)
         )
         conn.commit()
         conn.close()
