@@ -60,11 +60,11 @@
                     </div></td>
                     <td class="text-middle">{{ application["deadline"] }}</td>
                     {% if application['link'] == None %}
-                        <td class="text-end">N/A</td>
+                        <td class="text-center">N/A</td>
                     {% else %}
-                        <td class="text-end"><button class="btn-status btn-interview" target="_blank" href="{{ application['link'] }}">Go-to</button></td>
+                        <td class="text-center"><button class="btn-status btn-interview" target="_blank" href="{{ application['link'] }}">Go-to</button></td>
                     {% endif %}
-                    <td><a href="/edit/{{ application['id'] }}"class="btn ms-1 btn-sm btn-status btn-applied">Edit</a><form class="d-inline" method="POST" action="/delete/{{ application['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')"><button class="btn ms-1 btn-sm btn-status btn-rejected">Delete</button></form></td>
+                    <td><button href="/edit/{{ application['id'] }}"class="btn-status btn-applied">Edit</button><form class="d-inline" method="POST" action="/delete/{{ application['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')"><button class="ms-1 btn-status btn-rejected">Delete</button></form></td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -102,11 +102,7 @@
                     <td class="text-middle">{{ app["salary"] | brl }}</td>
                     <td class="text-middle">{{ app["category"] }}</td>
                     <td class="text-middle">{{ app["status"] }}</td>
-                    {% if app['link'] == None %}
-                        <td class="text-end">N/A</td>
-                    {% else %}
-                    {% endif %}
-                    <td><a href="/edit/{{ app['id'] }}"class="btn btn-status btn-sm btn-applied">Edit</a><form class="d-inline" method="POST" action="/delete/{{ app['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')"><button class="btn btn-status btn-sm ms-1 btn-rejected">Delete</button></form></td>
+                    <td><button href="/edit/{{ app['id'] }}"class="btn btn-status btn-sm btn-applied">Edit</button><form class="d-inline" method="POST" action="/delete/{{ app['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')"><button class="btn btn-status btn-sm ms-1 btn-rejected">Delete</button></form></td>
                 </tr>
             {% endfor %}
         </tbody>
