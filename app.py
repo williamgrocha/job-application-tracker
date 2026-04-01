@@ -4,6 +4,9 @@ from flask import Flask, flash, redirect, render_template, request
 from helpers import init_db, brl
 
 app = Flask(__name__)  # Start Flask App
+
+app.secret_key = "secret_pw" # This password is only here because this is an educational project
+
 init_db()  # Init Database
 
 # Custom filter
@@ -35,15 +38,23 @@ def index():
 @app.route("/create", methods=["GET", "POST"])
 def new_application():
     if request.method == "POST":
-        company = request.form.get("company").upper() # type: ignore
-        title = request.form.get("job_title").upper() # type: ignore
+        company = request.form.get("company") # type: ignore
+        if not company or company.strip() == "":
+            flash("Company is a required field.")
+            return redirect("/create")
+        title = request.form.get("job_title") # type: ignore
+        if not title or title.strip() == "":
+            flash("Title is a required field.")
+            return redirect("/create")
         salary = request.form.get("salary")
         link = request.form.get("link")
         if salary == "":
             salary = 0
         category = request.form.get("category") # type: ignore
         if (category not in CATEGORIES):
-            category = "On-site"
+            flash("Invalid Category.")
+            return redirect("/create")
+
         deadline = request.form.get("deadline")
         if deadline == "":
             deadline = None
@@ -68,17 +79,22 @@ def edit(id):
     
     if request.method == "POST":
         company = request.form.get("company")
-        if company == None:
-            company = "N/A"
+        print(company)
+        if not company or company.strip() == "":
+            flash("Company is a required field.")
+            return redirect("/edit/<int:id>")
         title = request.form.get("job_title")
-        if title == None:
-            title = "N/A"
+        print(title)
+        if not title or title.strip() == "":
+            flash("Title is a required field.")
+            return redirect("/edit/<int:id>")
         salary = request.form.get("salary")
         if salary == "":
             salary = 0
         category = request.form.get("category")
         if (category not in CATEGORIES or category == None):
-            category = "On-site"
+            flash("Invalid Category.")
+            return redirect("/edit/<int:id>")
         deadline = request.form.get("deadline")
         if deadline == "":
             deadline = None

@@ -22,11 +22,11 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="salary" class="form-label">Salary</label>
+                <div class="col-md-4 input-icon-wrapper salary-box">
+                    <label for="salary" class="currency-prefix">R$</label>
                     <input type="number" class="form-control" id="salary" name="salary" value="{{ application['salary'] or '' }}">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 ">
                     <label for="category" class="form-label">Category</label>
                     <select class="form-control" id="category" name="category" required>
                         {% for cat in categories %}
