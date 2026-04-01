@@ -1,0 +1,71 @@
+body {
+    background-color: #f8fafc; /* Light blue-gray background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+#static {
+    overflow: hidden;
+}
+
+.empty-state-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Centers the card vertically */
+    overflow: hidden;
+}
+
+.empty-state-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.icon-circle {
+    background-color: #eff6ff; /* Soft blue circle */
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+}
+
+.empty-state-card h2 {
+    color: #1e293b;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.empty-state-card p {
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
