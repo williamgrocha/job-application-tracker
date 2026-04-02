@@ -189,3 +189,14 @@ def update_status(id, status):
     else:
         flash(f"Status Updated: {status}!", "success")
     return redirect("/")
+
+@app.route("/dashboard")
+def dashboard():
+    conn = sqlite3.connect("applications.db")
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM applications")
+    applications = cursor.fetchall()
+    conn.close()
+
+    return render_template("dashboard.html", applications=applications)

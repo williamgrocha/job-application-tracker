@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Application
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-4">Edit Application</h1>
+    
+    <div class="container">
+        {% for application in applications %}
+            <p> {{ application.company }} - {{ application.job_title }} </p>
+        {% endfor %}
+    </div>
+{% endblock %}
