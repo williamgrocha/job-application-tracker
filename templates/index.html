@@ -59,7 +59,7 @@
                     {% endif %}
                     </div></td>
                     <td class="text-middle">{{ application["deadline"] }}</td>
-                    {% if application['link'] == None %}
+                    {% if application['link'] == None or application['link'] == "" or application['link'] == "/create" %}
                         <td class="text-center">N/A</td>
                     {% else %}
                         <td class="text-center"><form class="d-inline" action="{{ application['link'] }}" target="_blank"><button type="submit" class="btn-status btn-interview">Go-to</button></form></td>
@@ -85,6 +85,12 @@
 
 
 <h4 class="mb-4 text-start">Closed Applications</h4>
+    {% if not closed %}
+        <div class="mb-3">
+            <p>You don't have any closed applications.</p>
+        </div>
+        <hr>
+    {% else %}
 
 <table class="table closed-applications">
         <thead>
@@ -117,4 +123,5 @@
             {% endfor %}
         </tbody>
     </table>
+    {% endif %}
 {% endblock %}
