@@ -11,7 +11,7 @@
         <div class="mb-3">
             <p>You don't have any active applications.</p>
             <form action="/create" method="GET"><button class="btn-primary">
-            <span>+</span> Add application</button><form>
+            <span>+</span> Add application</button></form>
         </div>
         <hr>
     {% else %}
@@ -62,10 +62,10 @@
                     {% if application['link'] == None %}
                         <td class="text-center">N/A</td>
                     {% else %}
-                        <td class="text-center"><button class="btn-status btn-interview" target="_blank" href="{{ application['link'] }}">Go-to</button></td>
+                        <td class="text-center"><form class="d-inline" action="{{ application['link'] }}" target="_blank"><button type="submit" class="btn-status btn-interview">Go-to</button></form></td>
                     {% endif %}
                     <td>
-                        <button class="btn-status btn-applied"><a class="text-decoration-none" href="/edit/{{ application['id'] }}">Edit</a></button>
+                        <form class="d-inline"action="/edit/{{ application['id'] }}"><button class="btn-status btn-applied">Edit</button></form>
                         <form class="d-inline" method="POST" action="/delete/{{ application['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')">
                             <button class="ms-1 btn-status btn-rejected">Delete</button>
                         </form>
@@ -108,7 +108,7 @@
                     <td class="text-middle">{{ app["category"] }}</td>
                     <td class="text-middle">{{ app["status"] }}</td>
                     <td>
-                        <button class="btn-status btn-applied"><a class="text-decoration-none" href="/edit/{{ app['id'] }}">Edit</a></button>
+                        <form class="d-inline"action="/edit/{{ app['id'] }}"><button class="btn-status btn-applied">Edit</button></form>
                         <form class="d-inline" method="POST" action="/delete/{{ app['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')">
                             <button class="ms-1 btn-status btn-rejected">Delete</button>
                         </form>
