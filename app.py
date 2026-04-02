@@ -65,10 +65,11 @@ def new_application():
             return redirect("/create")
         
         salary = request.form.get("salary")
-        print(type(salary))
         link = request.form.get("link")
         if salary == None or salary.strip() == "": # Case: salary field is empty
             salary = 0
+        else:
+            salary = float(salary)
         if not isinstance(salary, (int, float)):
             flash("Invalid Salary", "danger")
             return redirect("/create")
