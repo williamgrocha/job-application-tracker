@@ -20,19 +20,19 @@
     </head>
 
     <body>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div id="flash-container" class="flash-wrapper">
-            {% for message in messages %}
-                <div class="alert-message alert-{{ message[0] }}">{{ message[1] }}</div>
-            {% endfor %}
-            </div>
-        {% endif %}
-        {% endwith %}
         <nav class="bg-light border navbar navbar-expand-md navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/"><span>Job Application Tracker</span></a>
             </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div id="flash-container" class="flash-wrapper position-absolute top-0 start-50 translate-middle-x mt-3">
+                    {% for message in messages %}
+                        <div class="alert-message alert-{{ message[0] }}">{{ message[1] }}</div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
         </nav>
 
         <main class="container py-5 text-center">
