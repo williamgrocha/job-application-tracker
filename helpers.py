@@ -27,6 +27,22 @@ def init_db():
     conn.commit()
     conn.close()
 
+def init_users_db():
+    conn = sqlite3.connect("applications.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL
+        )
+        """
+    )
+    conn.commit()
+    conn.close()
+
 def brl(value):
     """Format value as BRL."""
     if value is None:

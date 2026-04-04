@@ -243,3 +243,39 @@ def login():
             return redirect("/")
     else:
         return render_template("login.html")
+    
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        if not request.form.get("username"):
+            flash("Username is required.", "danger")
+            return redirect("/register")
+        elif not request.form.get("password") or not request.form.get("confirmation") or request.form.get("password").strip() == "" or request.form.get("confirmation").strip() == "":
+            flash("Password is required.", "danger")
+            return redirect("/register")
+        elif request.form.get("password") != request.form.get("confirmation"):
+            flash("Passwords do not match.", "danger")
+            return redirect("/register")
+        
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        conn = sqlite3.connect("applications.db")
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            flash("Username already exists.", "danger")
+            return redirect("/register")
+
+        hashed_password = generate_password_hash(password)
+        cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
+        conn.commit()
+        conn.close()
+
+        flash("Registration successful!", "success")
+        return redirect("/")
+    else:
+        return render_template("register.html")
