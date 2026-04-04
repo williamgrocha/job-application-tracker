@@ -3,7 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from helpers import init_db, brl, login_required
+from helpers import init_db, brl, init_users_db, login_required
 
 # Start Flask App
 app = Flask(__name__)
@@ -16,8 +16,11 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_PERMANENT"] = False
 Session(app)
 
+# Init Application's Database
+init_db()
 
-init_db()  # Init Database
+# Init Users Database
+init_users_db()
 
 # Custom filter
 app.jinja_env.filters["brl"] = brl
