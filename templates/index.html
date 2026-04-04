@@ -7,6 +7,8 @@
 {% block main %}
 
     <h3 class="mb-4 text-start">Applications</h3>
+    <br>
+    <br>
     {% if not applications %}
         <div class="mb-3">
             <p>You don't have any active applications.</p>
@@ -41,11 +43,11 @@
                     <td class="text-middle"><div class="status-actions">
                     {% if application.status == 'Saved' %}
                         <form action="/update_status/{{ application.id }}/Applied" method="POST" style="display:inline;">
-                        <button type="submit" class="btn-status btn-applied">Mark as Applied</button>
+                        <button type="submit" class="btn-status btn-applied">Applied</button>
                         </form>
                     {% elif application.status == 'Applied' %}
                         <form action="/update_status/{{ application.id }}/Interviewing" method="POST" style="display:inline;">
-                        <button type="submit" class="btn-status btn-interview">Move to interview</button>
+                        <button type="submit" class="btn-status btn-interview">Interview</button>
                         </form>
                     {% elif application.status == 'Interviewing' %}
                         <div class="d-flex gap-2 justify-content-center">
@@ -85,6 +87,7 @@
 
 
 <h4 class="mb-4 text-start">Closed Applications</h4>
+<br><br>
     {% if not closed %}
         <div class="mb-3">
             <p>You don't have any closed applications.</p>
@@ -112,7 +115,21 @@
                     <td class="text-middle text-wrap" style="max-width: 20rem; word-break: break-word">{{ app["job_title"] }}</td>
                     <td class="text-middle">{{ app["salary"] | brl }}</td>
                     <td class="text-middle">{{ app["category"] }}</td>
-                    <td class="text-middle">{{ app["status"] }}</td>
+                    <td class="text-middle"><div class="status-actions">
+                    {% if app.status == 'Offer' %}
+                        <form style="display:inline;">
+                        <button type="button" class="btn-status btn-offer button-static">Offered</button>
+                        </form>
+                    {% elif app.status == 'Rejected' %}
+                        <form style="display:inline;">
+                        <button type="button" class="btn-status btn-rejected button-static">Rejected</button>
+                        </form>
+                    {% elif app.status == 'Withdrawn' %}
+                        <form style="display:inline;">
+                        <button type="button" class="btn-status btn-added button-static">Withdrawn</button>
+                        </form>
+                    {% endif %}
+                    </div></td>
                     <td>
                         <form class="d-inline"action="/edit/{{ app['id'] }}"><button class="btn-status btn-applied"><i class="bi bi-pencil"></i></button></form>
                         <form class="d-inline" method="POST" action="/delete/{{ app['id'] }}" onsubmit="return confirm('Are you sure you want to delete this application?')">

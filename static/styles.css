@@ -187,6 +187,11 @@ input[type=number] {
 }
 
 .closed-applications{
-    opacity: 0.6;
+    opacity: 0.70;
     border-bottom: 1px solid #e5e7eb;
+}
+
+.button-static:hover {
+    filter: brightness(1);
+    cursor: default;
 }

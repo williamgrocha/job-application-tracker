@@ -69,10 +69,11 @@ def new_application():
         if salary == None or salary.strip() == "": # Case: salary field is empty
             salary = 0
         else:
-            salary = float(salary)
-        if not isinstance(salary, (int, float)):
-            flash("Invalid Salary", "danger")
-            return redirect("/create")
+            try:
+                salary = float(salary)
+            except ValueError: # Case: salary field is not a number
+                flash("Invalid Salary", "danger")
+                return redirect("/create")
 
         category = request.form.get("category")
         if (category not in CATEGORIES): # Case: invalid category was hard-coded
@@ -106,25 +107,27 @@ def edit(id):
         company = request.form.get("company")
         if not company or company.strip() == "": # Case: company field empty
             flash("Company is a required field.", "danger")
-            return redirect("/edit/<int:id>")
+            return redirect(f"/edit/{id}")
         
         title = request.form.get("job_title") # Case: title field empty
         if not title or title.strip() == "":
             flash("Title is a required field.", "danger")
-            return redirect("/edit/<int:id>")
+            return redirect(f"/edit/{id}")
         
         salary = request.form.get("salary") # Case: salary field empty
         if salary == None or salary =="":
             salary = 0
+        else:
             try:
                 salary = float(salary)
             except ValueError:
                 flash("Invalid Salary", "danger")
+                return redirect(f"/edit/{id}")
 
         category = request.form.get("category")
         if (category not in CATEGORIES or category == None):
             flash("Invalid Category.", "danger")
-            return redirect("/edit/<int:id>")
+            return redirect(f"/edit/{id}")
         
         deadline = request.form.get("deadline")
         if deadline == "":
@@ -134,7 +137,7 @@ def edit(id):
         status = request.form.get("status")
         if status not in STATUSES:
             flash("Invalid Status.", "danger")
-            return redirect("/edit/<int:id>")
+            return redirect(f"/edit/{id}")
         
         cursor = conn.cursor()
         cursor.execute(
