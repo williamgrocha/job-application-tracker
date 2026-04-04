@@ -24,9 +24,11 @@
     </head>
 
     <body>
-        <nav class="bg-light border navbar navbar-expand-md navbar-light">
+        <nav class="bg-light border navbar navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/"><span>Job Application Tracker</span></a>
+                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/register">Register</a>
             </div>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
