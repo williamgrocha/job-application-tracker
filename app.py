@@ -270,7 +270,7 @@ def register():
         existing_user = cursor.fetchone()
 
         if existing_user:
-            flash("Username already exists.", "danger")
+            flash("This username has already been taken.", "danger")
             return redirect("/register")
 
         hashed_password = generate_password_hash(password)
@@ -282,3 +282,11 @@ def register():
         return redirect("/")
     else:
         return render_template("register.html")
+    
+
+@app.route("/logout")
+def logout():
+    session.clear()
+
+    flash("Logged out successfully!", "success")
+    return redirect("/login")
