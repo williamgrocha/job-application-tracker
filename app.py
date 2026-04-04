@@ -1,11 +1,21 @@
 import sqlite3
 from flask import Flask, flash, redirect, render_template, request
+from flask_session import Session
+from werkzeug.security import generate_password_hash, check_password_hash
 
-from helpers import init_db, brl
+from helpers import init_db, brl, login_required
 
-app = Flask(__name__)  # Start Flask App
+# Start Flask App
+app = Flask(__name__)
 
-app.secret_key = "secret_pw" # This password is only here because this is not a deployed product
+# This password is only here because this is not a deployed product
+app.secret_key = "secret_pw"
+
+# Configure session to use filesystem (instead of signed cookies)
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_PERMANENT"] = False
+Session(app)
+
 
 init_db()  # Init Database
 

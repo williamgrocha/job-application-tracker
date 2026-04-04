@@ -1,4 +1,7 @@
+from functools import wraps
 import sqlite3
+
+from flask import redirect, session
 
 # Init Database
 def init_db():
@@ -29,3 +32,12 @@ def brl(value):
     if value is None:
         value = 0
     return f"R${value:,.2f}"
+
+def login_required(f):
+    wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get("user_id"):
+            return redirect("/login")
+        return f(*args, **kwargs)
+    
+    return decorated_function
