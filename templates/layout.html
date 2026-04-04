@@ -27,8 +27,19 @@
         <nav class="bg-light border navbar navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/"><span>Job Application Tracker</span></a>
-                <a class="nav-link" href="/login">Login</a>
-                <a class="nav-link" href="/register">Register</a>
+                <div class="d-flex">
+                {% if not session['user_id'] %}
+                    <ul class="navbar-nav d-flex flex-row gap-3">
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav d-flex flex-row gap-3">
+                        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    </ul>
+                    {% endif %}
+                </div>
             </div>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
