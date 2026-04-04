@@ -31,7 +31,7 @@
                     {% else %}
                     <ul class="navbar-nav d-flex flex-row gap-3">
                         <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                        <form action="/logout" onsubmit="return confirm('Are you sure you want to logout?')"><li class="nav-item"><button type="submit" class="btn btn-link nav-link">Logout</button></li></form>
                     </ul>
                     {% endif %}
                 </div>
