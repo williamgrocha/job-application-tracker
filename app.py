@@ -39,7 +39,6 @@ STATUSES = [ # Valid Statuses
 
 # Index route
 @app.route("/", methods=["POST", "GET"])
-@login_required
 def index():
     conn = sqlite3.connect("applications.db") # Connect with the DB
     conn.row_factory = sqlite3.Row # Create cursor to the DB using Row factory to access each value by their column names
@@ -63,7 +62,6 @@ def index():
 
 
 @app.route("/create", methods=["GET", "POST"])
-@login_required
 def new_application():
     if request.method == "POST":
         company = request.form.get("company")
@@ -111,7 +109,6 @@ def new_application():
     
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"]) # Route for specific id when clicked
-@login_required
 def edit(id):
     conn = sqlite3.connect("applications.db")
     conn.row_factory = sqlite3.Row
@@ -174,7 +171,6 @@ def edit(id):
     
 
 @app.route("/delete/<int:id>", methods=["POST"])
-@login_required
 def delete(id):
     conn = sqlite3.connect("applications.db")
     cursor = conn.cursor()
@@ -189,7 +185,6 @@ def delete(id):
     return redirect("/")
 
 @app.route("/update_status/<int:id>/<string:status>", methods=["POST"])
-@login_required
 def update_status(id, status):
     if status not in STATUSES:
         flash("Invalid Status.", "danger")
@@ -209,7 +204,6 @@ def update_status(id, status):
     return redirect("/")
 
 @app.route("/dashboard")
-@login_required
 def dashboard():
     conn = sqlite3.connect("applications.db")
     conn.row_factory = sqlite3.Row
