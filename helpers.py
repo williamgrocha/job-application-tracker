@@ -20,7 +20,9 @@ def init_db():
             notes TEXT,
             date_added TEXT DEFAULT (date('now', 'localtime')),
             status TEXT NOT NULL DEFAULT 'Saved',
-            link TEXT
+            link TEXT,
+            user_id INTEGER NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES users(id)
         )
         """
     )

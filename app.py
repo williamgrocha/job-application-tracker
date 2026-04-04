@@ -46,12 +46,12 @@ def index():
     conn = sqlite3.connect("applications.db") # Connect with the DB
     conn.row_factory = sqlite3.Row # Create cursor to the DB using Row factory to access each value by their column names
     res = conn.execute( # Query to get the opened applications
-        "SELECT * FROM applications WHERE status NOT IN ('Offer', 'Rejected', 'Withdrawn') ORDER BY id DESC"
+        "SELECT * FROM applications WHERE status NOT IN ('Offer', 'Rejected', 'Withdrawn') AND user_id = ? ORDER BY id DESC", (session.get("user_id"),)
         )
     applications = res.fetchall() # Store the query return
 
     res = conn.execute( # Second Query to get the closed applications
-        "SELECT * FROM applications WHERE status NOT IN ('Saved', 'Applied', 'Interviewing') ORDER BY id DESC"
+        "SELECT * FROM applications WHERE status NOT IN ('Saved', 'Applied', 'Interviewing') AND user_id = ? ORDER BY id DESC", (session.get("user_id"),)
         )
     applications_closed = res.fetchall() # Store the second query return
     conn.close() # Close the connection to avoid DB locking issues
@@ -97,11 +97,12 @@ def new_application():
         if deadline == None or deadline.strip() == "": # Case: deadline field is empty
             deadline = None
 
+        user_id = session.get("user_id")
         conn = sqlite3.connect("applications.db")
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO applications (company, job_title, salary, category, deadline, link) VALUES (?, ?, ?, ?, ?, ?)",
-            (company, title, salary, category, deadline, link)
+            "INSERT INTO applications (company, job_title, salary, category, deadline, link, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (company, title, salary, category, deadline, link, user_id)
         )
         conn.commit()
         conn.close()
