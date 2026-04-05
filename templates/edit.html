@@ -5,71 +5,76 @@
 {% endblock %}
 
 {% block main %}
-    <h1 class="mb-4">Edit Application</h1>
-    
-    <div class="container">
-        <form action="/edit/{{ application['id'] }}" method="post" class="text-start">
-            
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="company" class="form-label">Company</label>
-                    <input type="text" class="form-control" id="company" name="company" value="{{ application['company'] }}" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="job_title" class="form-label">Job Title</label>
-                    <input type="text" class="form-control" id="job_title" name="job_title" value="{{ application['job_title'] }}" required>
-                </div>
-            </div>
+    <section class="create-page">
+        <div class="create-header text-start">
+            <h1 class="create-title mb-2">Edit an application</h1>
+            <p class="create-subtitle mb-0">Keep this opportunity up to date as your process evolves.</p>
+        </div>
 
-            <div class="row mb-3 fix_edit_salary">
-                <div class="col-md-4 input-icon-wrapper salary-box">
-                    <label for="salary" class="currency-prefix">R$</label>
-                    <input type="number" class="form-control" id="salary" name="salary" value="{{ application['salary'] or '' }}">
+        <div class="create-card mt-4">
+            <form action="/edit/{{ application['id'] }}" method="post" class="create-form text-start">
+                <div class="row g-3 mb-1">
+                    <div class="col-md-6">
+                        <label for="company" class="form-label">Company <span class="required-dot">*</span></label>
+                        <input type="text" class="form-control" id="company" name="company" value="{{ application['company'] }}" placeholder="e.g. Nubank" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="job_title" class="form-label">Job title <span class="required-dot">*</span></label>
+                        <input type="text" class="form-control" id="job_title" name="job_title" value="{{ application['job_title'] }}" placeholder="e.g. Backend Engineer" required>
+                    </div>
                 </div>
-                <div class="col-md-4 ">
-                    <label for="category" class="form-label">Category</label>
-                    <select class="form-control" id="category" name="category" required>
-                        {% for cat in categories %}
-                            <option value="{{ cat }}"
-                            {% if cat == application['category'] %}
-                            selected
-                            {% endif %}>
-                                {{ cat }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="deadline" class="form-label">Deadline</label>
-                    <input type="date" class="form-control" id="deadline" name="deadline" value="{{ application['deadline'] or '' }}">
-                </div>
-            </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="link" class="form-label">Link</label>
-                    <input type="url" class="form-control" id="link" name="link" value="{{ application['link'] or '' }}">
-                </div>
-                <div class="col-md-6">
-                    <label for="status" class="form-label">Status</label>
-                    <select class="form-control" id="status" name="status">
-                        {% for status in statuses %}
-                            <option value="{{ status }}"
-                                {% if status == application['status'] %}
-                                    selected
-                                {% endif %}>{{ status }}</option>
-                                {{ status }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+                <div class="row g-3 mb-1">
+                    <div class="col-md-4">
+                        <label for="salary" class="form-label">Salary (optional)</label>
+                        <div class="input-icon-wrapper salary-box">
+                            <span class="currency-prefix">R$</span>
+                            <input type="number" class="form-control salary-input" id="salary" name="salary" value="{{ application['salary'] or '' }}" placeholder="0.00" min="0" step="0.01">
+                        </div>
+                    </div>
 
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit">Save Changes</button>
-                <a href="/" class="btn btn-secondary">Cancel</a>
-            </div>
-            
-        </form>
-    </div>
+                    <div class="col-md-4">
+                        <label for="category" class="form-label">Category <span class="required-dot">*</span></label>
+                        <select class="form-control" id="category" name="category" required>
+                            {% for cat in categories %}
+                                <option value="{{ cat }}" {% if cat == application['category'] %}selected{% endif %}>{{ cat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="deadline" class="form-label">Deadline (optional)</label>
+                        <input type="{% if application['deadline'] %}date{% else %}text{% endif %}"
+                        class="form-control"
+                        id="deadline"
+                        name="deadline"
+                        value="{{ application['deadline'] or '' }}"
+                        placeholder="Select a date"
+                        onfocus="this.type='date'"
+                        onblur="if(!this.value){this.type='text'}">
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label for="link" class="form-label">Application link (optional)</label>
+                        <input type="url" class="form-control" id="link" name="link" value="{{ application['link'] or '' }}" placeholder="https://company.com/jobs/role">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="status" class="form-label">Current status</label>
+                        <select class="form-control" id="status" name="status">
+                            {% for status in statuses %}
+                                <option value="{{ status }}" {% if status == application['status'] %}selected{% endif %}>{{ status }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="create-actions">
+                    <button class="btn btn-primary" type="submit">Update application</button>
+                    <a href="/" class="btn btn-secondary">Back to menu</a>
+                </div>
+            </form>
+        </div>
+    </section>
 {% endblock %}
