@@ -32,6 +32,9 @@ CATEGORIES = [
     "On-site"
 ]
 
+# Username
+USERNAME = "admin"
+
 # Valid Statuses
 STATUSES = [
     "Saved",
@@ -59,7 +62,7 @@ def index():
     applications_closed = res.fetchall() # Store the second query return
     conn.close() # Close the connection to avoid DB locking issues
     if not applications and not applications_closed:
-        return render_template("index-empty.html") # When Users has no applications
+        return render_template("index-empty.html", username=USERNAME) # When Users has no applications
     else:
         if not applications:
             return render_template("index.html", closed=applications_closed) # When User has only closed applications
@@ -289,8 +292,8 @@ def register():
         cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
         new_user = cursor.fetchone()
         session["user_id"] = new_user["id"]
-
         conn.close()
+        USERNAME = username
 
         flash("Registration successful!", "success")
         return redirect("/")
