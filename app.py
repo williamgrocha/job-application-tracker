@@ -3,7 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from helpers import date_br, init_db, brl, init_users_db, login_required
+from helpers import date_br, init_db, brl, login_required
 
 # Start Flask App
 app = Flask(__name__)
@@ -166,10 +166,19 @@ def edit(id):
             return redirect(f"/edit/{id}")
         
         cursor = conn.cursor()
+        cursor.execute("SELECT status FROM applications WHERE id=?", (id,))
+        current_status = cursor.fetchone()
+
         cursor.execute(
             "UPDATE applications SET company=?, job_title=?, salary=?, category=?, deadline=?, link=?, status=? WHERE id=?",
             (company.upper(), title.upper(), salary, category, deadline, link, status, id)
         )
+
+        cursor.execute(
+            "INSERT INTO last_status (user_id, application_id, old_status, new_status) VALUES (?, ?, ?, ?)",
+            (session.get("user_id"), id, current_status[0], status)
+        )
+
         conn.commit()
         conn.close()
         
