@@ -715,6 +715,18 @@ input[type=number] {
     }
 }
 
+@media (max-width: 576px) {
+    .apps-table thead th,
+    .apps-table tbody td {
+        white-space: nowrap !important;
+    }
+
+    .apps-table td.text-wrap {
+        max-width: none !important;
+        word-break: normal !important;
+    }
+}
+
 .button-static:hover {
     filter: brightness(1);
     cursor: default;
