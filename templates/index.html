@@ -38,7 +38,7 @@
                 <tbody>
                     {% for application in applications %}
                         <tr>
-                            <td class="text-middle">{{ application["date_added"] }}</td>
+                            <td class="text-middle">{{ application["date_added"]|date_br }}</td>
                             <td class="text-middle text-wrap" style="max-width: 20rem; word-break: break-word">{{ application["company"] }}</td>
                             <td class="text-middle text-wrap" style="max-width: 20rem; word-break: break-word">{{ application["job_title"] }}</td>
                             <td class="text-middle">{{ application["salary"] | brl }}</td>
@@ -68,7 +68,7 @@
                                 </div>
                             {% endif %}
                             </div></td>
-                            <td class="text-middle">{{ application["deadline"] }}</td>
+                            <td class="text-middle">{{ application["deadline"]|date_br }}</td>
                             {% if application['link'] == None or application['link'] == "" or application['link'] == "/create" %}
                                 <td class="text-center text-muted">N/A</td>
                             {% else %}

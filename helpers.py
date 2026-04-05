@@ -1,3 +1,4 @@
+from datetime import datetime
 from functools import wraps
 import sqlite3
 
@@ -59,3 +60,14 @@ def login_required(f):
         return f(*args, **kwargs)
     
     return decorated_function
+
+
+def date_br(value):
+    """Format date as DD/MM/YYYY."""
+    if not value:
+        return None
+    try:
+        value = datetime.strptime(value, "%Y-%m-%d").strftime("%d-%m-%Y")
+    except ValueError:
+        return value
+    return value
