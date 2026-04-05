@@ -10,6 +10,124 @@ body.no-scroll {
     overflow: hidden;
 }
 
+.app-navbar {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 8px 22px rgba(15, 23, 42, 0.04);
+    padding: 0.8rem 0;
+}
+
+.app-navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.app-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+}
+
+.brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0f766e, #0ea5e9);
+    box-shadow: 0 6px 16px rgba(14, 165, 233, 0.28);
+}
+
+.brand-text {
+    color: #0f172a;
+    font-size: 1.04rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.app-nav-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.app-nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #334155;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.app-nav-link:hover {
+    color: #0f172a;
+    background-color: #f1f5f9;
+}
+
+.app-nav-link-cta {
+    color: #0f172a;
+    border-color: #dbeafe;
+    background-color: #eff6ff;
+}
+
+.app-nav-link-cta:hover {
+    border-color: #93c5fd;
+    background-color: #dbeafe;
+}
+
+.app-nav-logout {
+    border: 1px solid #fecaca;
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+
+.app-nav-logout:hover {
+    border-color: #fca5a5;
+    background-color: #fee2e2;
+    color: #7f1d1d;
+}
+
+@media (max-width: 576px) {
+    .app-navbar {
+        padding: 0.65rem 0;
+    }
+
+    .brand-text {
+        font-size: 0.95rem;
+    }
+
+    .brand-mark {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+    }
+
+    .app-nav-list {
+        gap: 0.45rem;
+    }
+
+    .app-nav-link {
+        min-height: 34px;
+        padding: 0.35rem 0.65rem;
+        font-size: 0.84rem;
+    }
+}
+
 .empty-state-container {
     display: flex;
     justify-content: center;

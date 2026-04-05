@@ -24,22 +24,28 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        <nav class="bg-light border navbar navbar-light position-relative">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/"><span>Job Application Tracker</span></a>
-                <div class="d-flex">
+        <nav class="navbar app-navbar position-relative">
+            <div class="container-fluid app-navbar-inner">
+                <a class="navbar-brand app-brand" href="/">
+                    <span class="brand-mark" aria-hidden="true"><i class="bi bi-briefcase-fill"></i></span>
+                    <span class="brand-text">Job Application Tracker</span>
+                </a>
+
                 {% if not session.get("user_id") %}
-                    <ul class="navbar-nav d-flex flex-row gap-3">
-                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                    <ul class="navbar-nav app-nav-list">
+                        <li class="nav-item"><a class="app-nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="app-nav-link app-nav-link-cta" href="/register">Register</a></li>
                     </ul>
                 {% else %}
-                    <ul class="navbar-nav d-flex flex-row gap-3">
-                        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
-                        <form action="/logout" onsubmit="return confirm('Are you sure you want to logout?')"><li class="nav-item"><button type="submit" class="btn btn-link nav-link">Logout</button></li></form>
+                    <ul class="navbar-nav app-nav-list">
+                        <li class="nav-item"><a class="app-nav-link" href="/dashboard">Dashboard</a></li>
+                        <li class="nav-item">
+                            <form action="/logout" onsubmit="return confirm('Are you sure you want to logout?')">
+                                <button type="submit" class="app-nav-link app-nav-logout" aria-label="Logout">Logout</button>
+                            </form>
+                        </li>
                     </ul>
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
