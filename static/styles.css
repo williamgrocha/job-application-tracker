@@ -169,6 +169,98 @@ body.no-scroll {
     margin-bottom: 30px;
 }
 
+.create-page {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.create-title {
+    color: #0f172a;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    font-weight: 750;
+    letter-spacing: -0.02em;
+}
+
+.create-subtitle {
+    color: #64748b;
+    max-width: 60ch;
+}
+
+.create-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.07);
+    padding: clamp(1.1rem, 2vw, 1.7rem);
+}
+
+.create-form .form-label {
+    color: #334155;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.45rem;
+}
+
+.required-dot {
+    color: #dc2626;
+}
+
+.create-form .form-control {
+    border: 1px solid #dbe5ef;
+    border-radius: 10px;
+    min-height: 44px;
+    color: #0f172a;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-form .form-control::placeholder {
+    color: #94a3b8;
+}
+
+.create-form .form-control:focus {
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.14);
+}
+
+.create-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    padding-top: 0.45rem;
+}
+
+.create-actions .btn-secondary {
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+    color: #334155;
+    font-weight: 600;
+}
+
+.create-actions .btn-secondary:hover {
+    border-color: #94a3b8;
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+@media (max-width: 768px) {
+    .create-card {
+        border-radius: 14px;
+        padding: 1rem;
+    }
+
+    .create-actions {
+        justify-content: stretch;
+    }
+
+    .create-actions .btn {
+        width: 100%;
+    }
+}
+
 .btn-primary {
     background-color: #3b82f6;
     color: white;
@@ -210,7 +302,7 @@ body.no-scroll {
 /* 2. Position the R$ precisely */
 .currency-prefix {
     position: absolute;
-    left: 1.3rem;
+    left: 1rem;
     color: #626a74; /* Matching placeholder gray */
     font-size: 0.9rem;
     pointer-events: none; /* User clicks 'through' it to the input */
@@ -218,7 +310,8 @@ body.no-scroll {
 
 /* 3. Style input box */
 .salary-box input {
-    padding-left: 35px !important; /* This pushes 'Salary' to the right */
+    padding-left: 2.5rem !important;
+    padding-right: 0.75rem !important;
     width: 100%;
     /* Keep your existing border/background styles here */
 }
