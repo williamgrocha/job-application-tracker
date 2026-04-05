@@ -117,7 +117,7 @@ def new_application():
         conn.commit()
         conn.close()
 
-        return redirect("/")
+        return redirect("/dashboard")
     else:
         return render_template("create.html", categories=CATEGORIES)
     

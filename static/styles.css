@@ -785,6 +785,9 @@ input[type=number] {
 .btn-interviewing { background-color: #f3e8ff; color: #6b21a8; } /* Purple */
 .btn-offer { background-color: #dcfce7; color: #166534; } /* Green */
 .btn-rejected { background-color: #fee2e2; color: #991b1b; } /* Red */
+.btn-saved { background-color: #e2e8f0; color: #334155; } /* Slate */
+.btn-withdrawn,
+.btn-added { background-color: #f1f5f9; color: #475569; } /* Neutral gray */
 
 .fix_edit_salary {
    display: flex;
