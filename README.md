@@ -11,7 +11,7 @@
 ![Application List](/static/index.png)
 *A clean, organized view of active and closed job opportunities.*
 
-### 📥 Seamless Application Entry
+### 📥 Add & Edit
 <table width="100%">
   <tr>
     <td width="50%" align="center">
@@ -24,10 +24,7 @@
 </table>
 <p align="start">
   <i>
-    A streamlined data entry interface designed for rapid logging and precise updates. 
-    These forms implement <b>server-side validation</b> to ensure data integrity, allowing 
-    candidates to seamlessly transition job statuses while the system automatically 
-    records every movement in the audit log.
+    Streamlined forms for creating and refining entries, backed by robust server-side validation to ensure a consistent and accurate career pipeline.
   </i>
 </p>
 
