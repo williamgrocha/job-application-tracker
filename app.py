@@ -301,8 +301,10 @@ def dashboard():
     applications = cursor.fetchall()
 
 
-    cursor.execute("SELECT COUNT(*) FROM applications JOIN last_status ON applications.id = last_status.application_id WHERE applications.user_id = ? AND last_status.old_status = 'Interviewing'", (user_id,))
+    cursor.execute("SELECT COUNT(*) FROM applications JOIN last_status ON applications.id = last_status.application_id WHERE applications.user_id = ? AND (last_status.old_status = 'Interviewing' OR last_status.new_status = 'Interviewing') GROUP BY applications.id", (user_id,))
     interviews = cursor.fetchone()
+    if interviews is None:
+        interviews = (0,)
     conn.close()
 
     
