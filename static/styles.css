@@ -531,6 +531,33 @@ input[type=number] {
     background-color: #f8fbff;
 }
 
+.add-application-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.62rem 1rem;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.22);
+    transition: transform 0.14s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.add-application-btn i {
+    font-size: 0.9rem;
+}
+
+.add-application-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.28);
+}
+
+.add-application-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
 .actions-cell {
     min-width: 110px;
     white-space: nowrap;

@@ -10,8 +10,12 @@
     {% if not applications %}
         <div class="mb-3">
             <p>You don't have any active applications.</p>
-            <form action="/create" method="GET"><button class="btn-primary">
-            <span>+</span> Add application</button></form>
+            <form action="/create" method="GET">
+                <button class="btn-primary add-application-btn" type="submit">
+                    <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                    <span>Add application</span>
+                </button>
+            </form>
         </div>
         <hr>
     {% else %}
@@ -80,7 +84,10 @@
     <div class="mb-3">
     <form action="/create" method="get">
         <input hidden>
-        <button class="btn btn-primary" type="submit">+ Add</button>
+        <button class="btn btn-primary add-application-btn" type="submit">
+            <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            <span>Add application</span>
+        </button>
     </form>
     </div>
     {% endif %}
