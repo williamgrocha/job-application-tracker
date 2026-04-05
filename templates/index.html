@@ -49,9 +49,14 @@
                                 <button type="submit" class="btn-status btn-applied">Applied</button>
                                 </form>
                             {% elif application.status == 'Applied' %}
+                                <div class="d-flex gap-2 justify-content-center">
                                 <form action="/update_status/{{ application.id }}/Interviewing" method="POST" style="display:inline;">
                                 <button type="submit" class="btn-status btn-interview">Interview</button>
                                 </form>
+                                <form action="/update_status/{{ application.id }}/Rejected" method="POST" style="display:inline;">
+                                <button type="submit" class="btn-status btn-rejected">Not this time</button>
+                                </form>
+                                </div>
                             {% elif application.status == 'Interviewing' %}
                                 <div class="d-flex gap-2 justify-content-center">
                                 <form action="/update_status/{{ application.id }}/Offer" method="POST">
