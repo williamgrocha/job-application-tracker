@@ -239,7 +239,7 @@ def dashboard():
     this_week = cursor.fetchone()
     
     # Query to get the number of applications that got to interview
-    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Interview'", (user_id,))
+    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Interviewing'", (user_id,))
     interviewing = cursor.fetchone()
     print(interviewing[0])
 
@@ -259,11 +259,14 @@ def dashboard():
     cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Rejected'", (user_id,))
     rejected = cursor.fetchone()
 
+    # Query to get all applications for the user to show in the dashboard's table
+    cursor.execute("SELECT * FROM applications WHERE user_id = ?", (user_id,))
+    applications = cursor.fetchall()
     conn.close()
 
 
     interviews = interviewing[0] + offers[0]
-    return render_template("dashboard.html", total=total[0], this_week=this_week[0], interviews=interviews, offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0])
+    return render_template("dashboard.html", total=total[0], this_week=this_week[0], interviews=interviews, offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

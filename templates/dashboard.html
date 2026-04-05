@@ -72,24 +72,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for application in applications %}
                             <tr>
-                                <td>Acme Labs</td>
-                                <td>Backend Engineer</td>
-                                <td><span class="btn-status btn-applied button-static">Applied</span></td>
-                                <td>2026-04-11</td>
+                                <td>{{ application.company }}</td>
+                                <td>{{ application.job_title }}</td>
+                                <td><span class="btn-status btn-{{ application.status.lower() }} button-static">{{ application.status }}</span></td>
+                                <td>{{ application.deadline }}</td>
                             </tr>
-                            <tr>
-                                <td>Northstar AI</td>
-                                <td>Data Analyst</td>
-                                <td><span class="btn-status btn-interview button-static">Interviewing</span></td>
-                                <td>2026-04-14</td>
-                            </tr>
-                            <tr>
-                                <td>Pixel Foundry</td>
-                                <td>Product Designer</td>
-                                <td><span class="btn-status btn-offer button-static">Offer</span></td>
-                                <td>2026-04-18</td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
