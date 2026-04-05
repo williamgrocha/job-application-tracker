@@ -280,7 +280,7 @@ def dashboard():
     cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND date_added >= date('now', '-7 days')", (user_id,))
     this_week = cursor.fetchone()
     
-    # Query to get the number of applications that got to interview
+    # Query to get the number of applications that are interviewing
     cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Interviewing'", (user_id,))
     interviewing = cursor.fetchone()
     print(interviewing[0])
@@ -305,15 +305,21 @@ def dashboard():
     cursor.execute("SELECT * FROM applications WHERE user_id = ?", (user_id,))
     applications = cursor.fetchall()
 
-
-    cursor.execute("SELECT COUNT(*) FROM applications JOIN last_status ON applications.id = last_status.application_id WHERE applications.user_id = ? AND (last_status.old_status = 'Interviewing' OR last_status.new_status = 'Interviewing') GROUP BY applications.id", (user_id,))
-    interviews = cursor.fetchone()
-    if interviews is None:
-        interviews = (0,)
+    # Query to get the number of applications that changed status from 'Interviewing' to any other status for the insights section
+    cursor.execute(
+    """    
+        SELECT COUNT(DISTINCT applications.id)
+    FROM applications
+    JOIN last_status ON applications.id = last_status.application_id
+    WHERE applications.user_id = ?
+    AND last_status.old_status = 'Interviewing' 
+    """, (user_id,))
+    get_interviews = cursor.fetchone()
+    interviews = get_interviews[0] + interviewing[0] # Adding the current interviewing applications to the total number of interviews for a more complete insights
     conn.close()
 
     
-    return render_template("dashboard.html", username=username[0], total=total[0], this_week=this_week[0], interviews=interviews[0], offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
+    return render_template("dashboard.html", username=username[0], total=total[0], this_week=this_week[0], interviews=interviews, offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
