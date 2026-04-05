@@ -65,6 +65,16 @@ def brl(value):
     formatted = f"{value:,.2f}".replace(",", "TEMP").replace(".", ",").replace("TEMP", ".")
     return f"R$ {formatted}"
 
+
+def normalize_capitalize(value):
+    """Normalize text to capitalized words (e.g. software engineer)."""
+    if value is None:
+        return ""
+    text = value.strip()
+    if text == "":
+        return ""
+    return " ".join(part.capitalize() for part in text.split())
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):

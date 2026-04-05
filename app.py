@@ -3,7 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from helpers import date_br, init_db, brl, login_required
+from helpers import date_br, init_db, brl, login_required, normalize_capitalize
 
 # Start Flask App
 app = Flask(__name__)
@@ -40,6 +40,17 @@ STATUSES = [
     "Withdrawn"
 ]
 
+
+def normalize_application_fields(application):
+    """Ensure company and job title are always displayed in capitalized format."""
+    if not application:
+        return application
+
+    data = dict(application)
+    data["company"] = normalize_capitalize(data.get("company"))
+    data["job_title"] = normalize_capitalize(data.get("job_title"))
+    return data
+
 # Index route
 @app.route("/", methods=["POST", "GET"])
 @login_required
@@ -49,12 +60,12 @@ def index():
     res = conn.execute( # Query to get the opened applications
         "SELECT * FROM applications WHERE status NOT IN ('Offer', 'Rejected', 'Withdrawn') AND user_id = ? ORDER BY id DESC", (session.get("user_id"),)
         )
-    applications = res.fetchall() # Store the query return
+    applications = [normalize_application_fields(app) for app in res.fetchall()] # Store the query return
 
     res = conn.execute( # Second Query to get the closed applications
         "SELECT * FROM applications WHERE status NOT IN ('Saved', 'Applied', 'Interviewing') AND user_id = ? ORDER BY id DESC", (session.get("user_id"),)
         )
-    applications_closed = res.fetchall() # Store the second query return
+    applications_closed = [normalize_application_fields(app) for app in res.fetchall()] # Store the second query return
     conn.close() # Close the connection to avoid DB locking issues
     if not applications and not applications_closed:
         conn = sqlite3.connect("applications.db") # Connect with the DB
@@ -80,11 +91,13 @@ def new_application():
         if not company or company.strip() == "": # Case: company field is empty
             flash("Company is a required field.")
             return redirect("/create")
+        company = normalize_capitalize(company)
         
         title = request.form.get("job_title")
         if not title or title.strip() == "": # Case: title field is empty
             flash("Title is a required field.")
             return redirect("/create")
+        title = normalize_capitalize(title)
         
         salary = request.form.get("salary")
         link = request.form.get("link")
@@ -133,11 +146,13 @@ def edit(id):
         if not company or company.strip() == "": # Case: company field empty
             flash("Company is a required field.", "danger")
             return redirect(f"/edit/{id}")
+        company = normalize_capitalize(company)
         
         title = request.form.get("job_title") # Case: title field empty
         if not title or title.strip() == "":
             flash("Title is a required field.", "danger")
             return redirect(f"/edit/{id}")
+        title = normalize_capitalize(title)
         
         salary = request.form.get("salary") # Case: salary field empty
         if salary == None or salary =="":
@@ -171,7 +186,7 @@ def edit(id):
 
         cursor.execute(
             "UPDATE applications SET company=?, job_title=?, salary=?, category=?, deadline=?, link=?, status=? WHERE id=?",
-            (company.upper(), title.upper(), salary, category, deadline, link, status, id)
+            (company, title, salary, category, deadline, link, status, id)
         )
 
         cursor.execute(
@@ -186,7 +201,7 @@ def edit(id):
     else:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM applications WHERE id=?", (id,))
-        application = cursor.fetchone()
+        application = normalize_application_fields(cursor.fetchone())
         conn.close()
         
         if not application:
@@ -303,7 +318,7 @@ def dashboard():
 
     # Query to get all applications for the user to show in the dashboard's table
     cursor.execute("SELECT * FROM applications WHERE user_id = ?", (user_id,))
-    applications = cursor.fetchall()
+    applications = [normalize_application_fields(app) for app in cursor.fetchall()]
 
     # Query to get the number of applications that changed status from 'Interviewing' to any other status for the insights section
     cursor.execute(
