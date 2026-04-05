@@ -256,6 +256,9 @@ def login():
         cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
         user = cursor.fetchone()
         conn.close()
+        if not user:
+            flash("Invalid username.", "danger")
+            return redirect("/login")
 
         if user and check_password_hash(user["password"], password):
             session["user_id"] = user["id"]
