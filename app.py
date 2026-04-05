@@ -259,10 +259,13 @@ def login():
         if not user:
             flash("Invalid username.", "danger")
             return redirect("/login")
+        
+        elif not check_password_hash(user["password"], password):
+            flash("Invalid password.", "danger")
+            return redirect("/login")
 
-        if user and check_password_hash(user["password"], password):
-            session["user_id"] = user["id"]
-            return redirect("/")
+        session["user_id"] = user["id"]
+        return redirect("/")
     else:
         return render_template("login.html")
     
