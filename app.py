@@ -263,9 +263,14 @@ def update_status(id, status):
 def dashboard():
 
     user_id = session.get("user_id")
+
     conn = sqlite3.connect("applications.db")
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
+
+    # Query to get the username for the dashboard greeting
+    cursor.execute("SELECT username FROM users WHERE id = ?", (user_id,))
+    username = cursor.fetchone()
 
     # Query to get the total number of applications
     cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ?", (user_id,))
@@ -308,7 +313,7 @@ def dashboard():
     conn.close()
 
     
-    return render_template("dashboard.html", total=total[0], this_week=this_week[0], interviews=interviews[0], offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
+    return render_template("dashboard.html", username=username[0], total=total[0], this_week=this_week[0], interviews=interviews[0], offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
