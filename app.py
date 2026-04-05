@@ -236,9 +236,6 @@ def dashboard():
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
-    #Forget any user_id
-    session.clear()
-
     # User reached route via POST (as by submitting a form via POST): Validate form submission
     if request.method == "POST":
         if not request.form.get("username"):
