@@ -47,7 +47,7 @@
 
 ---
 #### Description:
-**Applied** is a comprehensive web-based application designed to solve "Job Search Fatigue"—the chaotic process of managing dozens of job applications across multiple platforms. Developed as the Final Project for **CS50x 2026**, this tool allows developers and professionals to track their career progress with a data-driven approach, moving beyond simple lists into a functional pipeline management system.
+The **Applied Tracker** is a comprehensive web-based application designed to solve "Job Search Fatigue"—the chaotic process of managing dozens of job applications across multiple platforms. Developed as the Final Project for **CS50x 2026**, this tool allows developers and professionals to track their career progress with a data-driven approach, moving beyond simple lists into a functional pipeline management system.
 
 The core philosophy of the project is to provide a "Single Source of Truth" for a candidate's journey. By utilizing a **Python and Flask** backend combined with a relational **SQLite** database, the application ensures that every interaction—from saving a job post to receiving an offer—is recorded, categorized, and analyzed.
 
