@@ -5,25 +5,35 @@
 {% endblock %}
 
 {% block main %}
+    <section class="auth-page">
+        <div class="auth-header text-start">
+            <h1 class="auth-title mb-2">Create your account</h1>
+            <p class="auth-subtitle mb-0">Join and start organizing your job applications with clarity.</p>
+        </div>
 
-    <h1 class="mb-4">Register</h1>
-    <form method="POST" class="mx-auto" style="max-width: 400px;">
-        <div class="mb-3 text-start">
-            <label for="username" class="form-label" autofocus autocomplete="off">Username</label>
-            <input autofocus autocomplete="off" type="text" class="form-control" id="username" name="username" required>
+        <div class="auth-card mt-4 mx-auto">
+            <form method="POST" class="auth-form text-start">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input autofocus autocomplete="off" type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" autocomplete="off" class="form-control" id="password" name="password" placeholder="Create a password" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="confirmation" class="form-label">Confirm password</label>
+                    <input type="password" autocomplete="off" class="form-control" id="confirmation" name="confirmation" placeholder="Repeat your password" required>
+                </div>
+
+                <div class="auth-actions">
+                    <a class="auth-link" href="/login">Already have an account?</a>
+                    <button type="submit" class="btn btn-primary px-4">Create account</button>
+                </div>
+            </form>
         </div>
-        <div class="mb-3 text-start">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" autocomplete="off" class="form-control" id="password" name="password" required>
-        </div>
-        <div class="mb-3 text-start">
-            <label for="confirm_password" class="form-label">Confirm Password</label>
-            <input type="password" autocomplete="off" class="form-control" id="confirmation" name="confirmation" required>
-        </div>
-                <div class="mb-3 d-flex justify-content-end align-items-center gap-3">
-            <a class="create-account text-decoration-none text-secondary text-nowrap" href="/login">Already have an account?</a>
-            <button type="submit" class="btn btn-primary px-4">Register</button>
-        </div>
-    </form>
+    </section>
 
 {% endblock %}
