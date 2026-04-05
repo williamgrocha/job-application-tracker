@@ -61,7 +61,9 @@ def brl(value):
     """Format value as BRL."""
     if value is None:
         value = 0
-    return f"R${value:,.2f}"
+    # Format as Brazilian Portuguese format (ponto para milhares, vírgula para decimal)
+    formatted = f"{value:,.2f}".replace(",", "TEMP").replace(".", ",").replace("TEMP", ".")
+    return f"R$ {formatted}"
 
 def login_required(f):
     @wraps(f)
