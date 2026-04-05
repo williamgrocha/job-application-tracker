@@ -25,13 +25,15 @@ init_users_db()
 # Custom filter
 app.jinja_env.filters["brl"] = brl
 
-CATEGORIES = [ # Valid Categories
+# Valid Categories
+CATEGORIES = [
     "Remote",
     "Hybrid",
     "On-site"
 ]
 
-STATUSES = [ # Valid Statuses
+# Valid Statuses
+STATUSES = [
     "Saved",
     "Applied",
     "Interviewing",
@@ -42,6 +44,7 @@ STATUSES = [ # Valid Statuses
 
 # Index route
 @app.route("/", methods=["POST", "GET"])
+@login_required
 def index():
     conn = sqlite3.connect("applications.db") # Connect with the DB
     conn.row_factory = sqlite3.Row # Create cursor to the DB using Row factory to access each value by their column names
