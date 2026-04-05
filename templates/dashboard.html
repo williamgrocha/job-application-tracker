@@ -1,15 +1,116 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Edit Application
+    Dashboard
 {% endblock %}
 
 {% block main %}
-    <h1 class="mb-4">Edit Application</h1>
-    
-    <div class="container">
-        {% for application in applications %}
-            <p> {{ application.company }} - {{ application.job_title }} </p>
-        {% endfor %}
-    </div>
+    <section class="dashboard-page">
+        <header class="dashboard-hero text-start">
+            <span class="dashboard-kicker">Overview</span>
+            <h1 class="dashboard-title">Your Job Search Dashboard</h1>
+            <p class="dashboard-subtitle">A clear view of progress, priorities, and next actions. Connect your backend data when ready.</p>
+
+            <div class="dashboard-hero-actions">
+                <a href="/create" class="btn btn-primary add-application-btn">
+                    <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                    <span>Add application</span>
+                </a>
+                <a href="/" class="btn btn-secondary">Open applications list</a>
+            </div>
+        </header>
+
+        <div class="dashboard-stats mt-4">
+            <article class="dashboard-stat-card">
+                <div class="dashboard-stat-icon"><i class="bi bi-briefcase"></i></div>
+                <div class="dashboard-stat-body">
+                    <span class="dashboard-stat-label">Total Applications</span>
+                    <strong class="dashboard-stat-value"> {{ total }} </strong>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <div class="dashboard-stat-icon"><i class="bi bi-send-check"></i></div>
+                <div class="dashboard-stat-body">
+                    <span class="dashboard-stat-label">Applied This Week</span>
+                    <strong class="dashboard-stat-value">{{ this_week }}</strong>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <div class="dashboard-stat-icon"><i class="bi bi-people"></i></div>
+                <div class="dashboard-stat-body">
+                    <span class="dashboard-stat-label">Interviews</span>
+                    <strong class="dashboard-stat-value">3</strong>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <div class="dashboard-stat-icon"><i class="bi bi-stars"></i></div>
+                <div class="dashboard-stat-body">
+                    <span class="dashboard-stat-label">Offers</span>
+                    <strong class="dashboard-stat-value">1</strong>
+                </div>
+            </article>
+        </div>
+
+        <div class="dashboard-grid mt-4">
+            <section class="dashboard-panel text-start">
+                <div class="dashboard-panel-head">
+                    <h3>Recent applications</h3>
+                    <a href="/" class="dashboard-panel-link">View all</a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table dashboard-table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Deadline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Acme Labs</td>
+                                <td>Backend Engineer</td>
+                                <td><span class="btn-status btn-applied button-static">Applied</span></td>
+                                <td>2026-04-11</td>
+                            </tr>
+                            <tr>
+                                <td>Northstar AI</td>
+                                <td>Data Analyst</td>
+                                <td><span class="btn-status btn-interview button-static">Interviewing</span></td>
+                                <td>2026-04-14</td>
+                            </tr>
+                            <tr>
+                                <td>Pixel Foundry</td>
+                                <td>Product Designer</td>
+                                <td><span class="btn-status btn-offer button-static">Offer</span></td>
+                                <td>2026-04-18</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <aside class="dashboard-panel dashboard-side-panel text-start">
+                <h3 class="mb-3">Pipeline snapshot</h3>
+
+                <ul class="dashboard-breakdown">
+                    <li><span>Saved</span><strong>7</strong></li>
+                    <li><span>Applied</span><strong>10</strong></li>
+                    <li><span>Interviewing</span><strong>3</strong></li>
+                    <li><span>Offer</span><strong>1</strong></li>
+                    <li><span>Rejected</span><strong>3</strong></li>
+                </ul>
+
+                <div class="dashboard-note mt-3">
+                    <h4>Quick tip</h4>
+                    <p class="mb-0">Try updating each application's status every day to keep momentum and spot bottlenecks earlier.</p>
+                </div>
+            </aside>
+        </div>
+    </section>
 {% endblock %}
