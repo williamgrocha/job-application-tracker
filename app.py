@@ -19,9 +19,6 @@ Session(app)
 # Init Application's Database
 init_db()
 
-# Init Users Database
-init_users_db()
-
 # Custom filter
 app.jinja_env.filters["brl"] = brl
 app.jinja_env.filters["date_br"] = date_br

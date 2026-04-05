@@ -9,6 +9,7 @@ def init_db():
     conn = sqlite3.connect("applications.db")
     cursor = conn.cursor()
 
+    # Create applications table if it doesn't exist
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS applications (
@@ -27,13 +28,7 @@ def init_db():
         )
         """
     )
-    conn.commit()
-    conn.close()
-
-def init_users_db():
-    conn = sqlite3.connect("applications.db")
-    cursor = conn.cursor()
-
+    # Create users table if it doesn't exist
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS users (
@@ -43,6 +38,7 @@ def init_users_db():
         )
         """
     )
+
     conn.commit()
     conn.close()
 
