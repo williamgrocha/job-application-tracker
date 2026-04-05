@@ -32,9 +32,6 @@ CATEGORIES = [
     "On-site"
 ]
 
-# Username
-USERNAME = "admin"
-
 # Valid Statuses
 STATUSES = [
     "Saved",
@@ -62,7 +59,14 @@ def index():
     applications_closed = res.fetchall() # Store the second query return
     conn.close() # Close the connection to avoid DB locking issues
     if not applications and not applications_closed:
-        return render_template("index-empty.html", username=USERNAME) # When Users has no applications
+        conn = sqlite3.connect("applications.db") # Connect with the DB
+        conn.row_factory = sqlite3.Row # Create cursor to the DB using Row factory to access each value by their column names
+        res = conn.execute("SELECT username FROM users WHERE id = ?", (session.get("user_id"),)) # Query to get the username of the user
+        user = res.fetchone() # Store the query return
+        username = user["username"] # Get the username from the query return
+        print(username)
+
+        return render_template("index-empty.html", username=username) # When Users has no applications
     else:
         if not applications:
             return render_template("index.html", closed=applications_closed) # When User has only closed applications
