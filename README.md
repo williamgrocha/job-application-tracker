@@ -1,23 +1,52 @@
-# APPLIED: A Strategic Job Application Tracker
+# APPLIED TRACKER: A Strategic Job Application Tracker
 #### Video Demo: <Link to your YouTube Video>
 
 ## Visual Overview
 
 ### 📊 The Intelligence Hub (Dashboard)
-![Dashboard Overview](link_da_sua_imagem_aqui)
+![Dashboard Overview](/static/dashboard.png)
 *Real-time metrics and pipeline snapshots to monitor your search progress.*
 
 ### 📋 Application Management
-![Application List](link_da_sua_imagem_aqui)
+![Application List](/static/index.png)
 *A clean, organized view of active and closed job opportunities.*
 
-### ➕ Streamlined Onboarding
-![Add New Application](link_da_sua_imagem_aqui)
-*Intuitive forms designed for speed and data accuracy.*
+### 📥 Seamless Application Entry
+<table width="100%">
+  <tr>
+    <td width="50%" align="center">
+      <img src="/static/new-application.png" alt="New Application Page"><br>
+    </td>
+    <td width="50%" align="center">
+      <img src="/static/edit.png" alt="Edit Application Page"><br>
+    </td>
+  </tr>
+</table>
+<p align="start">
+  <i>
+    A streamlined data entry interface designed for rapid logging and precise updates. 
+    These forms implement <b>server-side validation</b> to ensure data integrity, allowing 
+    candidates to seamlessly transition job statuses while the system automatically 
+    records every movement in the audit log.
+  </i>
+</p>
 
-### 👤 Login and Register
-![Login & Register](link_da_sua_imagem_aqui)
-*Intuitive forms designed for speed and data accuracy.*
+### 👤 Secure User Authentication
+<table width="100%">
+  <tr>
+    <td width="50%" align="center">
+      <img src="/static/login.png" alt="Login Page"><br>
+    </td>
+    <td width="50%" align="center">
+      <img src="/static/create-account.png" alt="Register Page"><br>
+    </td>
+  </tr>
+</table>
+<p align="start">
+  <i>
+    Safe, personalized access to your career pipeline with hashed password protection.
+  </i>
+</p>
 
 ---
 #### Description:
