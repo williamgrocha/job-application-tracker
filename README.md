@@ -1,5 +1,5 @@
 # APPLIED TRACKER: A Strategic Job Application Tracker
-#### Video Demo: [Here](https://www.youtube.com/watch?v=oVj4ti2ndP4)
+#### Video Demo: <https://www.youtube.com/watch?v=oVj4ti2ndP4>
 
 ## Visual Overview
 
