@@ -719,8 +719,3 @@ input[type=number] {
     filter: brightness(1);
     cursor: default;
 }
-
-.create-account:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-}
