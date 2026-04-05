@@ -285,6 +285,11 @@ def register():
         hashed_password = generate_password_hash(password)
         cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
         conn.commit()
+
+        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+        new_user = cursor.fetchone()
+        session["user_id"] = new_user["id"]
+
         conn.close()
 
         flash("Registration successful!", "success")
