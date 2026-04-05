@@ -206,6 +206,11 @@ def delete(id):
         (id,)
         )
     
+    cursor.execute(
+        "DELETE FROM last_status WHERE application_id=?",
+        (id,)
+    )
+    
     conn.commit()
     conn.close()
     return redirect("/")
@@ -218,8 +223,31 @@ def update_status(id, status):
         return redirect("/")
 
     conn = sqlite3.connect("applications.db")
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    cursor.execute("UPDATE applications SET status = ? WHERE id = ?", (status, id))
+
+    cursor.execute(
+        "SELECT status FROM applications WHERE id = ? AND user_id = ?",
+        (id, session.get("user_id"))
+    )
+    current_status = cursor.fetchone()
+
+    if not current_status:
+        conn.close()
+        flash("Application not found.", "danger")
+        return redirect("/")
+
+    cursor.execute(
+        "UPDATE applications SET status = ? WHERE id = ? AND user_id = ?",
+        (status, id, session.get("user_id"))
+    )
+
+    if current_status["status"] != status:
+        cursor.execute(
+            "INSERT INTO last_status (user_id, application_id, old_status, new_status) VALUES (?, ?, ?, ?)",
+            (session.get("user_id"), id, current_status["status"], status)
+        )
+
     conn.commit()
     conn.close()
     if status == "Withdrawn" or status == "Applied":
@@ -271,11 +299,14 @@ def dashboard():
     # Query to get all applications for the user to show in the dashboard's table
     cursor.execute("SELECT * FROM applications WHERE user_id = ?", (user_id,))
     applications = cursor.fetchall()
+
+
+    cursor.execute("SELECT COUNT(*) FROM applications JOIN last_status ON applications.id = last_status.application_id WHERE applications.user_id = ? AND last_status.old_status = 'Interviewing'", (user_id,))
+    interviews = cursor.fetchone()
     conn.close()
 
-
-    interviews = interviewing[0] + offers[0]
-    return render_template("dashboard.html", total=total[0], this_week=this_week[0], interviews=interviews, offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
+    
+    return render_template("dashboard.html", total=total[0], this_week=this_week[0], interviews=interviews[0], offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
