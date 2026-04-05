@@ -224,14 +224,46 @@ def update_status(id, status):
 @app.route("/dashboard")
 @login_required
 def dashboard():
+
+    user_id = session.get("user_id")
     conn = sqlite3.connect("applications.db")
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM applications")
-    applications = cursor.fetchall()
+
+    # Query to get the total number of applications
+    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ?", (user_id,))
+    total = cursor.fetchone()
+
+    # Query to get the number of applications created in the last 7 days
+    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND date_added >= date('now', '-7 days')", (user_id,))
+    this_week = cursor.fetchone()
+    
+    # Query to get the number of applications that got to interview
+    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Interview'", (user_id,))
+    interviewing = cursor.fetchone()
+    print(interviewing[0])
+
+    # Query to get the number of applications that got an offer
+    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Offer'", (user_id,))
+    offers = cursor.fetchone()
+
+    # Query to get the number of applications in the 'applied' status for the pipeline snapshot
+    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Applied'", (user_id,))
+    applied = cursor.fetchone()
+
+    # Query to get the number of applications in the 'saved' status for the pipeline snapshot
+    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Saved'", (user_id,))
+    saved = cursor.fetchone()
+
+    # Query to get the number of applications in the 'rejected' status for the pipeline snapshot
+    cursor.execute("SELECT COUNT(*) FROM applications WHERE user_id = ? AND status = 'Rejected'", (user_id,))
+    rejected = cursor.fetchone()
+
     conn.close()
 
-    return render_template("dashboard.html", applications=applications)
+
+    interviews = interviewing[0] + offers[0]
+    return render_template("dashboard.html", total=total[0], this_week=this_week[0], interviews=interviews, offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0])
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

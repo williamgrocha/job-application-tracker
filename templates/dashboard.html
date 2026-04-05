@@ -41,7 +41,7 @@
                 <div class="dashboard-stat-icon"><i class="bi bi-people"></i></div>
                 <div class="dashboard-stat-body">
                     <span class="dashboard-stat-label">Interviews</span>
-                    <strong class="dashboard-stat-value">3</strong>
+                    <strong class="dashboard-stat-value">{{ interviews }}</strong>
                 </div>
             </article>
 
@@ -49,7 +49,7 @@
                 <div class="dashboard-stat-icon"><i class="bi bi-stars"></i></div>
                 <div class="dashboard-stat-body">
                     <span class="dashboard-stat-label">Offers</span>
-                    <strong class="dashboard-stat-value">1</strong>
+                    <strong class="dashboard-stat-value">{{ offers }}</strong>
                 </div>
             </article>
         </div>
@@ -99,11 +99,11 @@
                 <h3 class="mb-3">Pipeline snapshot</h3>
 
                 <ul class="dashboard-breakdown">
-                    <li><span>Saved</span><strong>7</strong></li>
-                    <li><span>Applied</span><strong>10</strong></li>
-                    <li><span>Interviewing</span><strong>3</strong></li>
-                    <li><span>Offer</span><strong>1</strong></li>
-                    <li><span>Rejected</span><strong>3</strong></li>
+                    <li><span>Saved</span><strong>{{ saved }}</strong></li>
+                    <li><span>Applied</span><strong>{{ applied }}</strong></li>
+                    <li><span>Interviewing</span><strong>{{ interviewing }}</strong></li>
+                    <li><span>Offer</span><strong>{{ offers }}</strong></li>
+                    <li><span>Rejected</span><strong>{{ rejected }}</strong></li>
                 </ul>
 
                 <div class="dashboard-note mt-3">
