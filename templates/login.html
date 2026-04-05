@@ -16,7 +16,10 @@
             <label for="password" class="form-label">Password</label>
             <input type="password" autocomplete="off" class="form-control" id="password" name="password" required>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <div class="mb-3 d-flex justify-content-end align-items-center gap-3">
+            <a class="create-account text-decoration-none text-secondary text-nowrap" href="/register">Create account</a>
+            <button type="submit" class="btn btn-primary px-4">Login</button>
+        </div>
     </form>
 
 {% endblock %}

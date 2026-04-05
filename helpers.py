@@ -52,7 +52,7 @@ def brl(value):
     return f"R${value:,.2f}"
 
 def login_required(f):
-    wraps(f)
+    @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
             return redirect("/login")
