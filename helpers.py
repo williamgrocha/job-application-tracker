@@ -39,6 +39,21 @@ def init_db():
         """
     )
 
+    # Create last_status table if it doesn't exist
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS last_status (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            application_id INTEGER NOT NULL,
+            old_status TEXT NOT NULL,
+            new_status TEXT NOT NULL,
+            edited_at TEXT DEFAULT (datetime('now', 'localtime')),
+            FOREIGN KEY (user_id) REFERENCES users(id),
+            FOREIGN KEY (application_id) REFERENCES applications(id)
+        )
+        """
+    )
     conn.commit()
     conn.close()
 
