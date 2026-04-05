@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -8,8 +9,8 @@ from helpers import date_br, init_db, brl, login_required, normalize_capitalize
 # Start Flask App
 app = Flask(__name__)
 
-# This password is only here because this is not a deployed product
-app.secret_key = "secret_pw"
+# env password
+app.secret_key = os.environ.get("SECRET_KEY", "default_secret_key")
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_TYPE"] = "filesystem"
