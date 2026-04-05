@@ -54,7 +54,7 @@
                                 <button type="submit" class="btn-status btn-interviewing">Interview</button>
                                 </form>
                                 <form action="/update_status/{{ application.id }}/Rejected" method="POST" style="display:inline;">
-                                <button type="submit" class="btn-status btn-rejected">Not this time</button>
+                                <button type="submit" class="btn-status btn-rejected"><i class="bi bi-ban"></i></button>
                                 </form>
                                 </div>
                             {% elif application.status == 'Interviewing' %}
@@ -63,7 +63,7 @@
                                 <button type="submit" class="btn-status btn-offer">Got an Offer! 🎉</button>
                                 </form>
                                 <form action="/update_status/{{ application.id }}/Rejected" method="POST">
-                                <button type="submit" class="btn-status btn-rejected">Not this time</button>
+                                <button type="submit" class="btn-status btn-rejected"><i class="bi bi-ban"></i></button>
                                 </form>
                                 </div>
                             {% endif %}
