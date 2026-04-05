@@ -1,27 +1,53 @@
-# APPLIED: A Strategic Job Application Tracker
+# APPLIED TRACKER: A Strategic Job Application Tracker
 #### Video Demo: <Link to your YouTube Video>
 
 ## Visual Overview
 
 ### 📊 The Intelligence Hub (Dashboard)
-![Dashboard Overview](link_da_sua_imagem_aqui)
+![Dashboard Overview](/static/dashboard.png)
 *Real-time metrics and pipeline snapshots to monitor your search progress.*
 
 ### 📋 Application Management
-![Application List](link_da_sua_imagem_aqui)
+![Application List](/static/index.png)
 *A clean, organized view of active and closed job opportunities.*
 
-### ➕ Streamlined Onboarding
-![Add New Application](link_da_sua_imagem_aqui)
-*Intuitive forms designed for speed and data accuracy.*
+### 📥 Add & Edit
+<table width="100%">
+  <tr>
+    <td width="50%" align="center">
+      <img src="/static/new-application.png" alt="New Application Page"><br>
+    </td>
+    <td width="50%" align="center">
+      <img src="/static/edit.png" alt="Edit Application Page"><br>
+    </td>
+  </tr>
+</table>
+<p align="start">
+  <i>
+    Streamlined forms for creating and refining entries, backed by robust server-side validation to ensure a consistent and accurate career pipeline.
+  </i>
+</p>
 
-### 👤 Login and Register
-![Login & Register](link_da_sua_imagem_aqui)
-*Intuitive forms designed for speed and data accuracy.*
+### 👤 Secure User Authentication
+<table width="100%">
+  <tr>
+    <td width="50%" align="center">
+      <img src="/static/login.png" alt="Login Page"><br>
+    </td>
+    <td width="50%" align="center">
+      <img src="/static/create-account.png" alt="Register Page"><br>
+    </td>
+  </tr>
+</table>
+<p align="start">
+  <i>
+    Safe, personalized access to your career pipeline with hashed password protection.
+  </i>
+</p>
 
 ---
 #### Description:
-**Applied** is a comprehensive web-based application designed to solve "Job Search Fatigue"—the chaotic process of managing dozens of job applications across multiple platforms. Developed as the Final Project for **CS50x 2026**, this tool allows developers and professionals to track their career progress with a data-driven approach, moving beyond simple lists into a functional pipeline management system.
+The **Applied Tracker** is a comprehensive web-based application designed to solve "Job Search Fatigue"—the chaotic process of managing dozens of job applications across multiple platforms. Developed as the Final Project for **CS50x 2026**, this tool allows developers and professionals to track their career progress with a data-driven approach, moving beyond simple lists into a functional pipeline management system.
 
 The core philosophy of the project is to provide a "Single Source of Truth" for a candidate's journey. By utilizing a **Python and Flask** backend combined with a relational **SQLite** database, the application ensures that every interaction—from saving a job post to receiving an offer—is recorded, categorized, and analyzed.
 
