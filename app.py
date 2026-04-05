@@ -239,6 +239,7 @@ def login():
     #Forget any user_id
     session.clear()
 
+    # User reached route via POST (as by submitting a form via POST): Validate form submission
     if request.method == "POST":
         if not request.form.get("username"):
             flash("Username is required.", "danger")
@@ -256,6 +257,8 @@ def login():
         cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
         user = cursor.fetchone()
         conn.close()
+
+        # Check if username exists and if password is correct
         if not user:
             flash("Invalid username.", "danger")
             return redirect("/login")
@@ -263,14 +266,18 @@ def login():
         elif not check_password_hash(user["password"], password):
             flash("Invalid password.", "danger")
             return redirect("/login")
-
+        
+        # Remember which user has logged in
         session["user_id"] = user["id"]
         return redirect("/")
     else:
+        # GET method: render login page
         return render_template("login.html")
     
 @app.route("/register", methods=["GET", "POST"])
 def register():
+
+    # Post method: Validate form submission
     if request.method == "POST":
         if not request.form.get("username"):
             flash("Username is required.", "danger")
@@ -291,19 +298,21 @@ def register():
         cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
         existing_user = cursor.fetchone()
 
+        # Check if the username is already taken
         if existing_user:
             flash("This username has already been taken.", "danger")
             return redirect("/register")
-
+        
+        # Hash the password and insert the new user into the database
         hashed_password = generate_password_hash(password)
         cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
         conn.commit()
 
+        # Log the user in by storing their user ID in the session
         cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
         new_user = cursor.fetchone()
         session["user_id"] = new_user["id"]
         conn.close()
-        USERNAME = username
 
         flash("Registration successful!", "success")
         return redirect("/")
@@ -314,7 +323,9 @@ def register():
 @app.route("/logout")
 @login_required
 def logout():
+    # Forget any user_id
     session.clear()
 
+    # Flash a message to indicate successful logout
     flash("Logged out successfully!", "success")
     return redirect("/login")
