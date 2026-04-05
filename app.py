@@ -96,6 +96,7 @@ def new_application():
         else:
             try:
                 salary = float(salary)
+                salary = abs(salary) # Convert to absolute value to avoid negative salaries
             except ValueError: # Case: salary field is not a number
                 flash("Invalid Salary", "danger")
                 return redirect("/create")
@@ -147,6 +148,7 @@ def edit(id):
         else:
             try:
                 salary = float(salary)
+                salary = abs(salary) # Convert to absolute value to avoid negative salaries
             except ValueError:
                 flash("Invalid Salary", "danger")
                 return redirect(f"/edit/{id}")
