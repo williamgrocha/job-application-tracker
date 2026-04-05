@@ -51,7 +51,7 @@
                             {% elif application.status == 'Applied' %}
                                 <div class="d-flex gap-2 justify-content-center">
                                 <form action="/update_status/{{ application.id }}/Interviewing" method="POST" style="display:inline;">
-                                <button type="submit" class="btn-status btn-interview">Interview</button>
+                                <button type="submit" class="btn-status btn-interviewing">Interview</button>
                                 </form>
                                 <form action="/update_status/{{ application.id }}/Rejected" method="POST" style="display:inline;">
                                 <button type="submit" class="btn-status btn-rejected">Not this time</button>
@@ -125,7 +125,7 @@
                     <tbody class="closed-applications">
                         {% for app in closed %}
                             <tr>
-                                <td class="text-middle">{{ app["date_added"] }}</td>
+                                <td class="text-middle">{{ app["date_added"]|date_br }}</td>
                                 <td class="text-middle text-wrap" style="max-width: 20rem; word-break: break-word">{{ app["company"] }}</td>
                                 <td class="text-middle text-wrap" style="max-width: 20rem; word-break: break-word">{{ app["job_title"] }}</td>
                                 <td class="text-middle">{{ app["salary"] | brl }}</td>

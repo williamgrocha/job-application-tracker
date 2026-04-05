@@ -77,7 +77,7 @@
                                 <td>{{ application.company }}</td>
                                 <td>{{ application.job_title }}</td>
                                 <td><span class="btn-status btn-{{ application.status.lower() }} button-static">{{ application.status }}</span></td>
-                                <td>{{ application.deadline }}</td>
+                                <td>{{ application.deadline|date_br }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
