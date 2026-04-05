@@ -5,21 +5,30 @@
 {% endblock %}
 
 {% block main %}
+    <section class="auth-page">
+        <div class="auth-header text-start">
+            <h1 class="auth-title mb-2">Welcome back</h1>
+            <p class="auth-subtitle mb-0">Sign in to continue tracking your applications and progress.</p>
+        </div>
 
-    <h1 class="mb-4">Login</h1>
-    <form method="POST" class="mx-auto" style="max-width: 400px;">
-        <div class="mb-3 text-start">
-            <label for="username" class="form-label" autofocus autocomplete="off">Username</label>
-            <input autofocus autocomplete="off" type="text" class="form-control" id="username" name="username" required>
+        <div class="auth-card mt-4 mx-auto">
+            <form method="POST" class="auth-form text-start">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input autofocus autocomplete="off" type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" autocomplete="off" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="auth-actions">
+                    <a class="auth-link" href="/register">Create an account</a>
+                    <button type="submit" class="btn btn-primary px-4">Sign in</button>
+                </div>
+            </form>
         </div>
-        <div class="mb-3 text-start">
-            <label for="password" class="form-label" autocomplete="off">Password</label>
-            <input type="password" autocomplete="off" class="form-control" id="password" name="password" required>
-        </div>
-        <div class="mb-3 d-flex justify-content-end align-items-center gap-3">
-            <a class="create-account text-decoration-none text-secondary text-nowrap" href="/register">Create account</a>
-            <button type="submit" class="btn btn-primary px-4">Login</button>
-        </div>
-    </form>
+    </section>
 
 {% endblock %}
