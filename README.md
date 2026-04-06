@@ -45,6 +45,9 @@
   </i>
 </p>
 
+### Try it for yourself!
+Here: <https://applied-tracker.onrender.com>
+
 ---
 #### Description:
 The **Applied Tracker** is a comprehensive web-based application designed to solve "Job Search Fatigue"—the chaotic process of managing dozens of job applications across multiple platforms. Developed as the Final Project for **CS50x 2026**, this tool allows developers and professionals to track their career progress with a data-driven approach, moving beyond simple lists into a functional pipeline management system.
@@ -81,5 +84,11 @@ During development, a significant challenge was handling "Empty States"—the us
 Another critical decision was the implementation of **Robust Input Validation**. The backend logic strips whitespace from inputs and performs server-side type checking on salary fields to prevent database corruption. Negative values are automatically converted to absolute values, and invalid categories or statuses are rejected with user-friendly "Flash" messages.
 
 By choosing **SQLite** and **Flask**, the project remains lightweight yet powerful enough to be deployed in a production environment. The use of **Decorators** (`@login_required`) ensures that all routes are protected, following industry-standard security practices for web applications.
+
+### Try it for yourself!
+Here: <https://applied-tracker.onrender.com>
+
+##
+Important Note: This MVP uses server-side sessions for authentication, ensuring robust state management. Future iterations will include stricter password complexity requirements, multi-factor authentication (MFA) and more metrics on dashboard.
 
 ---
