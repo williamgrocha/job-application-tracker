@@ -334,8 +334,7 @@ def dashboard():
     interviews = get_interviews[0] + interviewing[0] # Adding the current interviewing applications to the total number of interviews for a more complete insights
     conn.close()
 
-    
-    return render_template("dashboard.html", username=username[0], total=total[0], this_week=this_week[0], interviews=interviews, offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
+    return render_template("dashboard.html", username=username[0], total=total[0]-saved[0], this_week=this_week[0]-saved[0], interviews=interviews, offers=offers[0], interviewing=interviewing[0], applied=applied[0], saved=saved[0], rejected=rejected[0], applications=applications)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
